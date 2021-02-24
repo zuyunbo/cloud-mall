@@ -1,24 +1,4 @@
 
-
-lamp:
-  database: # 字段介绍参考 DatabaseProperties
-    tenantDatabaserefix: lamp_base
-    multiTenantType: SCHEMA
-    isNotWrite: false
-    isBlockAttack: false
-    isSeata: false
-    id-type: HU_TOOL
-    hutoolId:
-      workerId: 0
-      dataCenterId: 0
-    cache-id:
-      time-bits: 31
-      worker-bits: 22
-      seq-bits: 10
-      epochStr: '2020-09-15'
-      boost-power: 3
-      padding-factor: 50
-
 spring:
   application:
     name: mall-store

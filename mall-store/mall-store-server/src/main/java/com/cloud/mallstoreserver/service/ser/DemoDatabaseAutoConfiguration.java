@@ -24,8 +24,8 @@ import java.util.List;
  * @Author zuyunbo
  * @Date 2021/2/24  2:24 下午
  **/
-@Configuration
 @Slf4j
+@Configuration
 @MapperScan(
         basePackages = {"com.cloud.mallstoreserver"},
         annotationClass = Repository.class,

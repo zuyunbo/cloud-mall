@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.scripting.LanguageDriver;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +37,7 @@ public abstract class BaseMasterDatabaseConfiguration extends BaseDatabaseConfig
     /**
      * 测试环境
      */
-    protected static final String[] DEV_PROFILES = new String[]{"dev"};
+    protected static final String[] DEV_PROFILES = new String[]{"master"};
 
 
     /**
@@ -52,8 +53,8 @@ public abstract class BaseMasterDatabaseConfiguration extends BaseDatabaseConfig
         super(properties, databaseProperties, interceptorsProvider, typeHandlersProvider, languageDriversProvider, resourceLoader, databaseIdProvider, configurationCustomizersProvider, mybatisPlusPropertiesCustomizerProvider, applicationContext);
     }
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.druid")
+    @Bean(name = DATABASE_PREFIX + "DruidDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
         return DruidDataSourceBuilder.create().build();
     }
@@ -66,6 +67,11 @@ public abstract class BaseMasterDatabaseConfiguration extends BaseDatabaseConfig
         } else {
             return dataSource;
         }
+    }
+
+    @Bean(DATABASE_PREFIX + "SqlSessionFactory")
+    public SqlSessionFactory getSqlSessionFactory(@Qualifier(DATABASE_PREFIX + "DataSource") DataSource dataSource) throws Exception {
+        return super.sqlSessionFactory(dataSource);
     }
 
 }
