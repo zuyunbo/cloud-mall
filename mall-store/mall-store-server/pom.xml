@@ -34,6 +34,12 @@
 
         <dependency>
             <groupId>com.cloud</groupId>
+            <artifactId>mall-store-controller</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloud</groupId>
             <artifactId>mall-store-entity</artifactId>
             <version>1.0</version>
         </dependency>
@@ -43,6 +49,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <artifactId>velocity</artifactId>
+            <groupId>org.apache.velocity</groupId>
+            <version>1.7</version>
+        </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
