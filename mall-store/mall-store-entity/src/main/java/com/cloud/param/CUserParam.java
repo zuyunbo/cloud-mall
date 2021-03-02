@@ -8,7 +8,7 @@ import lombok.Data;
  * ${comments}
  *
  * @author 2u c1111
- * @since 1.0 2021-02-28
+ * @since 1.0 2021-03-02
  */
 @Data
 public class CUserParam  {

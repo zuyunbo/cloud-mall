@@ -19,11 +19,13 @@ import lombok.EqualsAndHashCode;
 public class ${className} {
 	private static final long serialVersionUID = 1L;
 
+    private Long id;
+
 #foreach ($column in $columns)
 #if($column.columnName != 'id' && $column.columnName != 'creator' && $column.columnName != 'create_date')
 
 
-     private Long id;
+
 
     /**
      * $column.comments

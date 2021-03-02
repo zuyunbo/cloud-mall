@@ -3,7 +3,6 @@ package com.cloud.controller;
 import com.cloud.entity.${className};
 import com.cloud.param.${className}Param;
 import com.cloud.service.${className}Service;
-import com.example.commoncenter.base.BaseResponseUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
