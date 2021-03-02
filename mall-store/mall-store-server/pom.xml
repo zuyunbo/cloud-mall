@@ -22,6 +22,18 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>cloud-database</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>cloud-base-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
@@ -55,11 +67,7 @@
             <version>1.7</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.1</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.alibaba</groupId>
