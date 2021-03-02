@@ -5,7 +5,6 @@ import com.cloud.param.${className}Param;
 import ${package}.${moduleName}.${className};
 import com.cloud.mapper.${className}Mapper;
 import com.cloud.service.${className}Service;
-import com.example.commoncenter.exception.IllegalParameterException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;

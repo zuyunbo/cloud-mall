@@ -13,5 +13,9 @@ import lombok.Data;
 @Data
 public class ${className}Param  {
 
+    private int ps;
+
+    private int pn;
+
 
 }

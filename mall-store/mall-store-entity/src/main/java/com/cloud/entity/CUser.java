@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 /**
  *
  * @author 2u c1111
- * @since 1.0 2021-02-26
+ * @since 1.0 2021-02-28
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -19,8 +19,8 @@ import lombok.EqualsAndHashCode;
 public class CUser {
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
 
-	private Long id ;
     /**
      * 创建时间
      */

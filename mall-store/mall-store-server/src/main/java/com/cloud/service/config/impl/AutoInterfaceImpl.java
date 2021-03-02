@@ -5,13 +5,18 @@ import com.cloud.service.config.AutoInterface;
 import com.cloud.service.entity.ColumnEntity;
 import com.cloud.service.entity.TableEntity;
 import com.cloud.service.service.GenerateCode;
+import com.cloud.service.util.SpringContextUtil;
 import com.cloud.service.util.Utils;
 import com.cloud.service.service.impl.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.core.ApplicationContext;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.cloud.service.datasource.defaults.BaseMasterDatabaseConfiguration.DATABASE_PREFIX;
 
 /**
  * @author ynb2u
@@ -55,8 +60,11 @@ public abstract class AutoInterfaceImpl implements AutoInterface {
     @Override
     public void connectionJDBC(String table) {
         try {
-            Class.forName(DRIVER);
-            con = DriverManager.getConnection(URL, NAME, PASS);
+
+            DataSource bean = (DataSource)SpringContextUtil.getBean(DATABASE_PREFIX + "DruidDataSource");
+       /*     Class.forName(DRIVER);
+            con = DriverManager.getConnection(URL, NAME, PASS);*/
+            con = bean.getConnection();
             if (con == null) {
                 log.error("{} =========> 创建数据库失败", AutoInterfaceImpl.class.getName());
             }

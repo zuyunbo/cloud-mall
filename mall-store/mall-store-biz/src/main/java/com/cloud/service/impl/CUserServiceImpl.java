@@ -7,18 +7,16 @@ import com.cloud.mapper.CUserMapper;
 import com.cloud.service.CUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 
 
-import java.util.Map;
 
 /**
  * ${comments}
  *
  * @author 2u c1111
- * @since 1.0 2021-02-26
+ * @since 1.0 2021-02-28
  */
 @Service
 public class CUserServiceImpl implements CUserService {
@@ -63,5 +61,6 @@ public class CUserServiceImpl implements CUserService {
         return PageHelper.startPage(queryParam.getPn(), queryParam.getPs())
                 .doSelectPageInfo(() -> cUserMapper.listQuery(queryParam));
     }
+
 
 }

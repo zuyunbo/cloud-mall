@@ -1,8 +1,9 @@
 package com.cloud.service;
 
-import com.example.commoncenter.base.BaseServiceInterface;
 import com.cloud.param.${className}Param;
 import ${package}.${moduleName}.${className};
+import com.cloud.util.BaseServiceInterface;
+
 
 /**
  * ${comments}
@@ -10,6 +11,6 @@ import ${package}.${moduleName}.${className};
  * @author ${author} ${email}
  * @since ${version} ${date}
  */
-public interface ${className}Service extends BaseServiceInterface<${className}, ${className}Param,Long> {
+public interface ${className}Service  {
 
 }

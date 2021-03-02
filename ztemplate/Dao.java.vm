@@ -14,7 +14,7 @@ import com.cloud.param.${className}Param;
  * @since ${version} ${date}
  */
 @Repository
-public interface ${className}Mapper extends Mapper<${className}> {
+public interface ${className}Mapper extends BaseMapper<${className}> {
 
 
     List<${className}> listQuery(${className}Param queryParam);

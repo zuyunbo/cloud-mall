@@ -2,10 +2,8 @@ package ${package}.${moduleName};
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import com.example.commoncenter.base.BaseEntity;
 import lombok.Builder;
 import lombok.Data;
-import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 
 
@@ -23,6 +21,10 @@ public class ${className} {
 
 #foreach ($column in $columns)
 #if($column.columnName != 'id' && $column.columnName != 'creator' && $column.columnName != 'create_date')
+
+
+     private Long id;
+
     /**
      * $column.comments
      */

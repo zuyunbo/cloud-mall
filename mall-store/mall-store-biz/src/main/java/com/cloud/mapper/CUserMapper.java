@@ -11,7 +11,7 @@ import com.cloud.param.CUserParam;
 /**
  *
  * @author 2u c1111
- * @since 1.0 2021-02-26
+ * @since 1.0 2021-02-28
  */
 @Repository
 public interface CUserMapper extends BaseMapper<CUser> {
