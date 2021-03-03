@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
  * @Author zuyunbo
  * @Date 2021/3/3  4:58 下午
  **/
-public abstract class SuperSimpleController<Entity> implements BaseController<Entity> {
+public abstract class SuperSimpleController<Entity> implements BaseController<Entity>  {
 
     Class<Entity> entityClass = null;
 
@@ -19,8 +19,8 @@ public abstract class SuperSimpleController<Entity> implements BaseController<En
             ParameterizedType p = (ParameterizedType)genericSuperclass;
             System.out.println("dsds" + p);
             Type[] actualTypeArguments = p.getActualTypeArguments();
-            System.out.println("dsds1111" + p.getActualTypeArguments()[2].toString());
-            this.entityClass =  (Class<Entity>)actualTypeArguments[2];
+            System.out.println("dsds1111" + p.getActualTypeArguments()[1].toString());
+            this.entityClass =  (Class<Entity>)actualTypeArguments[1];
         }
         return this.entityClass;
     }
