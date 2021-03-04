@@ -22,6 +22,12 @@
 
         <dependency>
             <groupId>com.cloud</groupId>
+            <artifactId>cloud-base-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloud</groupId>
             <artifactId>mall-store-entity</artifactId>
             <version>1.0</version>
         </dependency>

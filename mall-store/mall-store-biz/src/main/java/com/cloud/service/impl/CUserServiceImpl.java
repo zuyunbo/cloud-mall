@@ -1,5 +1,6 @@
 package com.cloud.service.impl;
 
+import com.cloud.service.SuperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.cloud.param.CUserParam;
 import com.cloud.entity.CUser;
@@ -21,48 +22,10 @@ import java.util.Map;
  * @since 1.0 2021-03-02
  */
 @Service
-public class CUserServiceImpl implements CUserService {
+public class CUserServiceImpl extends SuperServiceImpl<CUserMapper, CUser> implements CUserService {
 
 
-    @Autowired
-    CUserMapper cUserMapper;
 
-    @Override
-    public int save(CUser entity) {
-        return cUserMapper.insert(entity);
-    }
-
-    @Override
-    public int update(CUser entity) {
-        if (entity.getId() == null || entity.getId() == 0L) {
-            // 自己定义的异常方法
-        }
-
-        return cUserMapper.updateById(entity);
-    }
-
-    @Override
-    public int remove(Long id) {
-        if (id == null || id == 0L) {
-            // 自己定义的异常方法
-        }
-        return cUserMapper.deleteById(id);
-    }
-
-    @Override
-    public CUser getById(Long id) {
-        if (id == null || id == 0L) {
-            // 自己定义的异常方法
-        }
-
-        return cUserMapper.selectById(id);
-    }
-
-    @Override
-    public PageInfo<CUser> pageQuery(CUserParam queryParam) {
-        return PageHelper.startPage(queryParam.getPn(), queryParam.getPs())
-                .doSelectPageInfo(() -> cUserMapper.listQuery(queryParam));
-    }
 
 
 }

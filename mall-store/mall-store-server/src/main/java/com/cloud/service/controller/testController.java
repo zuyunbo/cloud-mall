@@ -2,7 +2,9 @@ package com.cloud.service.controller;
 
 import com.cloud.cloudbaseutil.base.controller.GeneratorController;
 import com.cloud.entity.CUser;
+import com.cloud.service.CUserService;
 import com.cloud.service.test.SaveController;
+import com.cloud.service.test.SuperController;
 import com.cloud.service.test.SuperSimpleController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/test")
-public class testController extends SuperSimpleController<CUser> {
+public class testController extends SuperController<CUserService,CUser ,CUser> {
 
     @GetMapping("/code1")
     public String generator1(){

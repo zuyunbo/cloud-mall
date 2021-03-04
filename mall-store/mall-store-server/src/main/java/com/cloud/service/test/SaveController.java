@@ -23,8 +23,8 @@ public interface SaveController<Entity, SaveDto> extends BaseController<Entity> 
         R<Entity> result = handlerSave(saveDto);
         if (result.getDefExec()) {
             Entity model = BeanUtil.toBean(saveDto, getEntityClass());
-
-
+            getBaseService().save(model);
+            result.setData(model);
         }
         return result;
     }

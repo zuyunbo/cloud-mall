@@ -2,9 +2,8 @@ package com.cloud.entity;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -15,16 +14,14 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Builder
+@Accessors(chain = true)
 @Api(description = "c_user")
+@AllArgsConstructor
+@NoArgsConstructor
 public class CUser {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 5169873634279173683L;
 
     private Long id;
-
-
-
-
-
     /**
      * 创建时间
      */
@@ -102,4 +99,5 @@ public class CUser {
      */
      @ApiModelProperty("账号")
      private String username;
+
 }
