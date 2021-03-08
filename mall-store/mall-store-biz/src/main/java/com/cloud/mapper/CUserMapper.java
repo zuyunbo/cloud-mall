@@ -1,6 +1,7 @@
 package com.cloud.mapper;
 
 
+import com.cloud.cloudbaseutil.base.mapper.SuperMapper;
 import com.cloud.entity.CUser;
 import org.springframework.stereotype.Repository;
 import java.util.List;

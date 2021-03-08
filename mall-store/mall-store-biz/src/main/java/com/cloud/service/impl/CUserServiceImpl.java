@@ -1,19 +1,10 @@
 package com.cloud.service.impl;
 
-import com.cloud.service.SuperServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.cloud.param.CUserParam;
+import com.cloud.cloudbaseutil.base.service.SuperServiceImpl;
 import com.cloud.entity.CUser;
 import com.cloud.mapper.CUserMapper;
 import com.cloud.service.CUserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import java.util.List;
 import org.springframework.stereotype.Service;
-
-
-
-import java.util.Map;
 
 /**
  * ${comments}
