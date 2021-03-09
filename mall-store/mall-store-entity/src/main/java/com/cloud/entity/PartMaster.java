@@ -14,10 +14,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-@Builder
 @Api(description = "part_master")
 public class PartMaster {
-	private static final long serialVersionUID = 1L;
 
     private Long id;
 
