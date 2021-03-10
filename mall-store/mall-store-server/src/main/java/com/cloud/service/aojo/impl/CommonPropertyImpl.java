@@ -4,14 +4,16 @@ import com.cloud.entity.PartAssembly;
 import com.cloud.entity.PartMaster;
 import com.cloud.entity.PartVersion;
 import com.cloud.service.aojo.CommonPropertyService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * common
+ * common 集成 与任何没关系
  *
  * @Author zuyunbo
  * @Date 2021/3/9  9:59 上午
@@ -23,6 +25,10 @@ public class CommonPropertyImpl<T> implements CommonPropertyService {
     private static Map<String, Object> partAssemblyMap = new HashMap<>();
     private static Map<String, Object> partMasterMap = new HashMap<>();
     private static Map<String, Object> partVersionMap = new HashMap<>();
+
+    private static Map<String, Object> common = new HashMap<>();
+
+
 
 
     @Override
@@ -41,11 +47,17 @@ public class CommonPropertyImpl<T> implements CommonPropertyService {
     }
 
     @Override
+    public Map<String, Object> getCommonMap() {
+        return common;
+    }
+
+    @Override
     public <T> void set(T bean, String fun, Object value) {
         try {
             Method method = bean.getClass().getMethod(fun, Class.forName(value.getClass().getCanonicalName()));
             method.invoke(bean, value);
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }
@@ -55,6 +67,32 @@ public class CommonPropertyImpl<T> implements CommonPropertyService {
         char[] cs = str.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);
+    }
+
+    /**
+     * 判断对象中属性值是否全为空
+     *
+     * @param object
+     * @return
+     */
+    public static boolean checkObjAllFieldsIsNull(Object object) {
+        if (null == object) {
+            return true;
+        }
+
+        try {
+            for (Field f : object.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+                if (f.get(object) != null && StringUtils.isNotBlank(f.get(object).toString())) {
+                    return false;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     static {
@@ -135,6 +173,86 @@ public class CommonPropertyImpl<T> implements CommonPropertyService {
         partVersionMap.put("Change Number Part Version", "changeNumberPartVersion");
         partVersionMap.put("Series Disposal", "seriesDisposal");
         partVersionMap.put("Aftersales disposal", "afterSalesDisposal");
+
+
+        common.put("partAssembly", PartAssembly.class);
+        common.put("Node GUID", "nodeGuid");
+        common.put("Affect BOM", "affectBom");
+        common.put("BKK Part Number ref.", "bkkPartNumberRef");
+        common.put("Node Name", "nodeName");
+        common.put("BOM line ID", "bomLineId");
+        common.put("Change Number", "changeNumber");
+        common.put("BoM Change Number Time Stamp", "bomChangeNumberTimeStamp");
+        common.put("Quantity", "quantity");
+        common.put("Position Variant Name", "positionVariantName");
+        common.put("Usage Rule", "usageRule");
+        common.put("BOM Line TID", "bomLineTid");
+        common.put("BOM valid until date", "bomValidUntilDate");
+        common.put("Release hint", "releaseHint");
+        common.put("Weight type", "weightType");
+        common.put("Weight", "weight");
+        common.put("Weight Unit", "weightUnit");
+        common.put("Build phase", "buildPhase");
+        common.put("SOP date", "sopDate");
+        common.put("Startup parameter", "startupParameter");
+        common.put("BMW I-Level", "bmwIEvel");
+        common.put("tightening element", "tighteningElement");
+        common.put("Reusable", "reusable");
+        common.put("Bolting category", "boltingCategory");
+        common.put("Rivet nut or bolt", "rivetNutOrBolt");
+        common.put("Setting force/path", "settingForcePath");
+        common.put("Deviation setting force/path", "deviationSettingForcePath");
+        common.put("Control method", "controlMethod");
+        common.put("Tigh.self-tapping", "tighSelfTapping");
+        common.put("Screw Protection", "screwProtection");
+        common.put("Bolting class", "boltingClass");
+        common.put("tightening torque", "tighteningTorque");
+        common.put("Est.max.tight.torque", "estMaxTightTorque");
+        common.put("Tightening angle", "tighteningAngle");
+        common.put("Angle tolerance", "angleTolerance");
+        common.put("Pre-comments", "preComments");
+        common.put("Comment Service", "commentService");
+        common.put("BMW location", "bmwLocation");
+        common.put("label req. by law", "labelReqByLaw");
+        common.put("fitment location", "fitmentLocation");
+        common.put("location req. by law", "locationReqByLaw");
+        common.put("G-BOM CO No.", "gBomCoNo");
+        common.put("Creator", "creator");
+        common.put("GWM Comment", "gwmComment");
+        common.put("external part number", "externalPartNumber");
+        common.put("External Part CI", "externalPartCi");
+        common.put("External Part DI", "externalPartDi");
+        common.put("Assembly header reference GUID", "assemblyHeaderReferenceGuid");
+
+        //  partMaster  init
+        common.put("partMasterMap", PartMaster.class);
+        common.put("part number", "partNumber");
+        common.put("part name (ENG)", "partName");
+        common.put("Unit", "unit");
+        common.put("Part Ownership Indicator", "partOwnershipIndicator");
+        common.put("BMW character key", "bmwCharacterKey");
+        common.put("BMW left - right characteristics", "bmwLeftRightCharacteristics");
+        common.put("Symmetric Part", "symmetricPart");
+        common.put("Legal Relevant", "legalRelevant");
+        common.put("ESD Flag", "esdFlag");
+        common.put("dangerous goods", "dangerousGoods");
+        common.put("BMW DMU", "bmwDmu");
+        common.put("BMW drawing hint", "bmwDrawingHint");
+        common.put("All color reference", "allColorReference");
+        common.put("BMW release status", "bmwReleaseStatus");
+        common.put("Color Code", "colorCode");
+        common.put("BMW HW/SW mark", "bmwHwSwMark");
+
+        //   partVersion  init
+        common.put("partVersion", PartVersion.class);
+        common.put("part change index", "partChangeIndex");
+        common.put("drawing index", "drawingIndex");
+        common.put("Part TID", "partTid");
+        common.put("Change Number Part Version", "changeNumberPartVersion");
+        common.put("Series Disposal", "seriesDisposal");
+        common.put("Aftersales disposal", "afterSalesDisposal");
+
+
     }
 
 }

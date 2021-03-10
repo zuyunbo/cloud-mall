@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author zuyunbo
+ * 用于拼装实体和提供字段对应关系   如： BOM line ID 对应PO bomLineID
+ * 拼装3层根据map寻找对应关系
+ *
+ * @Author ynBo 2u
  * @Date 2021/3/9  12:55 下午
  **/
 @Slf4j
@@ -36,12 +39,15 @@ public class AnalyseFilePropertyServiceImpl<T, R> implements AnalyseFileService<
                 PropertyValue.Name name = propertyValue1.getName();
                 StringValue.ValueComponent valueComponent = ((StringValue) propertyValue1).getValueComponent();
                 String characterString = name.getCharacterString();
+                // PartMaster数据
                 if (commonPropertyService.getPartMasterMap().containsKey(characterString)) {
                     sendModelBaseService.sendDateByPojo((R) entityClass, characterString, valueComponent.getCharacterString());
                 }
+                // partVersion数据
                 if (commonPropertyService.getPartVersionMap().containsKey(characterString)) {
                     sendModelBaseService.sendDateByPojo((R) entityClass, characterString, valueComponent.getCharacterString());
                 }
+                // Bom主数据
                 if (commonPropertyService.getPartAssemblyMap().containsKey(characterString)) {
                     sendModelBaseService.sendDateByPojo((R) entityClass, characterString, valueComponent.getCharacterString());
                 }

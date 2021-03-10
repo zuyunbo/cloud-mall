@@ -7,10 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStreamReader;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 /**
+ * 基于组装AP242头部标签的整体
+ * <>UOS代表文件所有信息</>
+ *
  * @Author zuyunbo
  * @Date 2021/3/9  12:55 下午
  **/
@@ -28,6 +29,7 @@ public class AnalyseFileHeadServiceImpl<T> implements AnalyseFileService<T> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 最外层结构 看文档
         Uos uos = (Uos) xmlObject;
         return uos;
     }

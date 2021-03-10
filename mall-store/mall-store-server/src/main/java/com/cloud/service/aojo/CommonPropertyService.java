@@ -14,6 +14,8 @@ public interface CommonPropertyService {
 
     Map<String, Object> getPartVersionMap();
 
+    Map<String, Object> getCommonMap();
+
     <T> void set(T c, String fun, Object value) ;
 
 

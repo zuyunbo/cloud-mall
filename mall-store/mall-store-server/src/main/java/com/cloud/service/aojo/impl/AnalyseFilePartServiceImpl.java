@@ -1,5 +1,6 @@
 package com.cloud.service.aojo.impl;
 
+import com.cloud.entity.Common;
 import com.cloud.entity.PartAssembly;
 import com.cloud.entity.PartMaster;
 import com.cloud.entity.PartVersion;
@@ -18,7 +19,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cloud.service.aojo.impl.CommonPropertyImpl.checkObjAllFieldsIsNull;
+
 /**
+ * 基于组装Part
+ * 在标签<part>---<PropertyValueAssignment>  最简单的层级结构
+ * <>主要寻找PropertyValueAssignment标签</>
+ *
  * @Author zuyunbo
  * @Date 2021/3/9  12:55 下午
  **/
@@ -37,14 +44,16 @@ public class AnalyseFilePartServiceImpl<T, R> implements AnalyseFileService<T> {
 
     @Override
     public Object resolvingAp242(T file) {
-        List<PartMaster> partMasters = new ArrayList<>();
+        List<Common> partMasters = new ArrayList<>();
         List<BaseRootObject> activityOrActivityMethodOrAddress1 = (List<BaseRootObject>) analyseFileService.resolvingAp242(file);
         // 在标签<part>---<PropertyValueAssignment>
         for (BaseRootObject baseRootObject : activityOrActivityMethodOrAddress1) {
             // 直接取参数
             List<PropertyValueAssignment> propertyValueAssignment = ((Part) baseRootObject).getPropertyValueAssignment();
             Object o = AnalyseFilePropertyServiceImpl.resolvingAp242((T) propertyValueAssignment);
-            partMasters.add((PartMaster) o);
+            if (!checkObjAllFieldsIsNull(o)) {
+                partMasters.add((Common) o);
+            }
         }
         return partMasters;
     }
