@@ -52,6 +52,7 @@ public class AnalyseFilePartServiceImpl<T, R> implements AnalyseFileService<T> {
             List<PropertyValueAssignment> propertyValueAssignment = ((Part) baseRootObject).getPropertyValueAssignment();
             Object o = AnalyseFilePropertyServiceImpl.resolvingAp242((T) propertyValueAssignment);
             if (!checkObjAllFieldsIsNull(o)) {
+                ((Common) o).setPartIdz(((Part) baseRootObject).getId().getId());
                 partMasters.add((Common) o);
             }
         }

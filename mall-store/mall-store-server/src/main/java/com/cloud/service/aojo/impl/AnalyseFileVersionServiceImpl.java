@@ -50,6 +50,7 @@ public class AnalyseFileVersionServiceImpl<T, R> implements AnalyseFileService<T
                 // 根据文档中的字段 对应 实体类字段关系
                 Object o = AnalyseFilePropertyServiceImpl.resolvingAp242((T) propertyValueAssignment);
                 if(!checkObjAllFieldsIsNull(o)){
+                    ((Common) o).setPartIdz(((Part) baseRootObject).getId().getId());
                     partVersions.add((Common) o);
                 }
             }
