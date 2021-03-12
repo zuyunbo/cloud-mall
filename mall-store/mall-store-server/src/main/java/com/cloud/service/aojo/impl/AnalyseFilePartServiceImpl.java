@@ -1,8 +1,6 @@
 package com.cloud.service.aojo.impl;
 
-import com.cloud.entity.Common;
-import com.cloud.entity.PartAssembly;
-import com.cloud.entity.PartMaster;
+import com.cloud.entity.*;
 import com.cloud.entity.PartVersion;
 import com.cloud.service.aojo.AnalyseFileService;
 import com.cloud.service.aojo.CommonPropertyService;
@@ -44,7 +42,7 @@ public class AnalyseFilePartServiceImpl<T, R> implements AnalyseFileService<T> {
 
     @Override
     public Object resolvingAp242(T file) {
-        List<Common> partMasters = new ArrayList<>();
+        List<PartCommon> partMasters = new ArrayList<>();
         List<BaseRootObject> activityOrActivityMethodOrAddress1 = (List<BaseRootObject>) analyseFileService.resolvingAp242(file);
         // 在标签<part>---<PropertyValueAssignment>
         for (BaseRootObject baseRootObject : activityOrActivityMethodOrAddress1) {
@@ -52,8 +50,8 @@ public class AnalyseFilePartServiceImpl<T, R> implements AnalyseFileService<T> {
             List<PropertyValueAssignment> propertyValueAssignment = ((Part) baseRootObject).getPropertyValueAssignment();
             Object o = AnalyseFilePropertyServiceImpl.resolvingAp242((T) propertyValueAssignment);
             if (!checkObjAllFieldsIsNull(o)) {
-                ((Common) o).setPartIdz(((Part) baseRootObject).getId().getId());
-                partMasters.add((Common) o);
+                ((PartCommon) o).setPartIdz(((Part) baseRootObject).getId().getId());
+                partMasters.add((PartCommon) o);
             }
         }
         return partMasters;

@@ -1,6 +1,7 @@
 package com.cloud.service.aojo.impl;
 
 import com.cloud.entity.Common;
+import com.cloud.entity.PartCommon;
 import com.cloud.entity.PartMaster;
 import com.cloud.service.aojo.SendModelBaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ public class SendModelByPartMasterImpl<T, R> extends CommonPropertyImpl<T> imple
 
     @Override
     public Object getEntityClass() {
-        return new Common();
+        return new PartCommon();
     }
 
 
