@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Transient;
 
 
 /**
@@ -73,4 +74,8 @@ public class PartVersion {
      */
      @ApiModelProperty("生产旧件处理")
      private String seriesDisposal;
+
+    @Transient
+    private String partIds;
+
 }

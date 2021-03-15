@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cloud.mapper.PartCommonMapper">
+
+    <select id="listQuery" parameterType="com.cloud.param.PartCommonParam" resultType="com.cloud.entity.PartCommon">
+        SELECT * FROM part_common
+    </select>
+
+    <insert id="saveByEntity" parameterType="com.cloud.entity.PartCommon">
+        insert into MSTDATA.MD_PART_COMMON
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="affectBom != null">
+                affect_bom,
+            </if>
+            <if test="afterSalesDisposal != null">
+                after_sales_disposal,
+            </if>
+            <if test="allColorReference != null">
+                all_color_reference,
+            </if>
+            <if test="angleTolerance != null">
+                angle_tolerance,
+            </if>
+            <if test="assemblyHeaderReferenceGuid != null">
+                assembly_header_reference_guid,
+            </if>
+            <if test="bkkPartNumberRef != null">
+                bkk_part_number_ref,
+            </if>
+            <if test="bmwCharacterKey != null">
+                bmw_character_key,
+            </if>
+            <if test="bmwDmu != null">
+                bmw_dmu,
+            </if>
+            <if test="bmwDrawingHint != null">
+                bmw_drawing_hint,
+            </if>
+            <if test="bmwHwSwMark != null">
+                bmw_hw_sw_mark,
+            </if>
+            <if test="bmwIEvel != null">
+                bmw_i_evel,
+            </if>
+            <if test="bmwLeftRightCharacteristics != null">
+                bmw_left_right_characteristics,
+            </if>
+            <if test="bmwLocation != null">
+                bmw_location,
+            </if>
+            <if test="bmwReleaseStatus != null">
+                bmw_release_status,
+            </if>
+            <if test="boltingCategory != null">
+                bolting_category,
+            </if>
+            <if test="boltingClass != null">
+                bolting_class,
+            </if>
+            <if test="bomChangeNumberTimeStamp != null">
+                bom_change_number_time_stamp,
+            </if>
+            <if test="bomLevel != null">
+                bom_level,
+            </if>
+            <if test="bomLineId != null">
+                bom_line_id,
+            </if>
+            <if test="bomLineTid != null">
+                bom_line_tID,
+            </if>
+            <if test="bomValidUntilDate != null">
+                bom_valid_until_date,
+            </if>
+            <if test="buildPhase != null">
+                build_phase,
+            </if>
+            <if test="changeNumber != null">
+                change_number,
+            </if>
+            <if test="changeNumberPartVersion != null">
+                change_number_part_version,
+            </if>
+            <if test="colorCode != null">
+                color_code,
+            </if>
+            <if test="commentService != null">
+                comment_service,
+            </if>
+            <if test="controlMethod != null">
+                control_method,
+            </if>
+            <if test="dangerousGoods != null">
+                dangerous_goods,
+            </if>
+            <if test="dataOperationIndicator != null">
+                data_operation_indicator ,
+            </if>
+            <if test="deviationSettingForcePath != null">
+                deviation_setting_force_path,
+            </if>
+            <if test="drawingIndex != null">
+                drawing_index,
+            </if>
+            <if test="esdFlag != null">
+                esd_flag ,
+            </if>
+            <if test="estMaxTightTorque != null">
+                est_max_tight_torque ,
+            </if>
+            <if test="externalPartCi != null">
+                external_part_ci ,
+            </if>
+            <if test="externalPartDi != null">
+                external_part_di ,
+            </if>
+            <if test="externalPartNumber != null">
+                external_part_number,
+            </if>
+            <if test="fitmentLocation != null">
+                fitment_location ,
+            </if>
+            <if test="gBomCoNo!= null">
+                g_bom_co_no ,
+            </if>
+            <if test="gwmComment != null">
+                gwm_comment ,
+            </if>
+            <if test="labelReqByLaw != null">
+                label_req_by_law,
+            </if>
+            <if test="legalRelevant != null">
+                legal_relevant ,
+            </if>
+            <if test="locationReqByLaw != null">
+                location_req_by_law ,
+            </if>
+            <if test="nodeGuid != null">
+                node_guid ,
+            </if>
+            <if test="nodeName != null">
+                node_name ,
+            </if>
+            <if test="partChangeIndex != null">
+                part_change_index ,
+            </if>
+            <if test="partName != null">
+                part_name,
+            </if>
+            <if test=" partNumber!= null">
+                part_number,
+            </if>
+            <if test="partOwnershipIndicator != null">
+                part_ownership_indicator,
+            </if>
+            <if test="partTid != null">
+                part_tid,
+            </if>
+            <if test="positionVariantName != null">
+                position_variant_name,
+            </if>
+            <if test="preComments != null">
+                pre_comments,
+            </if>
+            <if test="quantity != null  and quantity!=''">
+                quantity ,
+            </if>
+            <if test="releaseHint != null">
+                release_hint ,
+            </if>
+            <if test="reusable != null">
+                reusable ,
+            </if>
+            <if test="rivetNutOrBolt != null">
+                rivet_nut_or_bolt,
+            </if>
+            <if test="screwProtection != null">
+                screw_protection  ,
+            </if>
+            <if test="seriesDisposal!= null">
+                series_disposal  ,
+            </if>
+            <if test="settingForcePath != null">
+                setting_force_path ,
+            </if>
+            <if test="sopDate != null">
+                sop_date ,
+            </if>
+            <if test="startupParameter != null">
+                startup_parameter ,
+            </if>
+            <if test="symmetricPart != null">
+                symmetric_part ,
+            </if>
+            <if test="tighSelfTapping != null">
+                tigh_self_tapping,
+            </if>
+            <if test="tighteningAngle != null">
+                tightening_angle ,
+            </if>
+            <if test="tighteningElement != null">
+                tightening_element ,
+            </if>
+            <if test="tighteningTorque!= null">
+                tightening_torque ,
+            </if>
+            <if test="unit != null">
+                unit ,
+            </if>
+            <if test="usageRule != null">
+                usage_rule ,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="weightType != null">
+                weight_type ,
+            </if>
+            <if test="weightUnit != null">
+                weight_unit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="affectBom != null">
+                #{affectBom},
+            </if>
+            <if test="afterSalesDisposal != null">
+                #{afterSalesDisposal},
+            </if>
+            <if test="allColorReference != null">
+                #{allColorReference},
+            </if>
+            <if test="angleTolerance != null">
+                #{angleTolerance},
+            </if>
+            <if test="assemblyHeaderReferenceGuid != null">
+                #{assemblyHeaderReferenceGuid},
+            </if>
+            <if test="bkkPartNumberRef != null">
+                #{bkkPartNumberRef},
+            </if>
+            <if test="bmwCharacterKey != null">
+                #{bmwCharacterKey},
+            </if>
+            <if test="bmwDmu != null">
+                #{bmwDmu},
+            </if>
+            <if test="bmwDrawingHint != null">
+                #{bmwDrawingHint},
+            </if>
+            <if test="bmwHwSwMark != null">
+                #{bmwHwSwMark},
+            </if>
+            <if test="bmwIEvel != null">
+                #{bmwIEvel},
+            </if>
+            <if test="bmwLeftRightCharacteristics != null">
+                #{bmwLeftRightCharacteristics},
+            </if>
+            <if test="bmwLocation != null">
+                #{bmwLocation},
+            </if>
+            <if test="bmwReleaseStatus != null">
+                #{bmwReleaseStatus},
+            </if>
+            <if test="boltingCategory != null">
+                #{boltingCategory},
+            </if>
+            <if test="boltingClass != null">
+                #{boltingClass},
+            </if>
+            <if test="bomChangeNumberTimeStamp != null">
+                #{bomChangeNumberTimeStamp},
+            </if>
+            <if test="bomLevel != null">
+                #{bomLevel},
+            </if>
+            <if test="bomLineId != null">
+                #{bomLineId},
+            </if>
+            <if test="bomLineTid != null">
+                #{bomLineTid},
+            </if>
+            <if test="bomValidUntilDate != null">
+                #{bomValidUntilDate},
+            </if>
+            <if test="buildPhase != null">
+                #{buildPhase},
+            </if>
+            <if test="changeNumber != null">
+                #{changeNumber},
+            </if>
+            <if test="changeNumberPartVersion != null">
+                #{changeNumberPartVersion},
+            </if>
+            <if test="colorCode != null">
+                #{colorCode},
+            </if>
+            <if test="commentService != null">
+                #{commentService},
+            </if>
+            <if test="controlMethod != null">
+                #{controlMethod},
+            </if>
+            <if test="dangerousGoods != null">
+                #{dangerousGoods},
+            </if>
+            <if test="dataOperationIndicator != null">
+                #{dataOperationIndicator},
+            </if>
+            <if test="deviationSettingForcePath != null">
+                #{deviationSettingForcePath},
+            </if>
+            <if test="drawingIndex != null">
+                #{drawingIndex},
+            </if>
+            <if test="esdFlag != null">
+                #{esdFlag},
+            </if>
+            <if test="estMaxTightTorque != null">
+                #{estMaxTightTorque},
+            </if>
+            <if test=" externalPartCi!= null">
+                #{externalPartCi},
+            </if>
+            <if test="externalPartDi != null">
+                #{externalPartDi},
+            </if>
+            <if test="externalPartNumber != null">
+                #{externalPartNumber},
+            </if>
+            <if test="fitmentLocation != null">
+                #{fitmentLocation},
+            </if>
+            <if test=" gBomCoNo!= null">
+                #{gBomCoNo},
+            </if>
+            <if test="gwmComment != null">
+                #{gwmComment},
+            </if>
+            <if test="labelReqByLaw != null">
+                #{labelReqByLaw},
+            </if>
+            <if test="legalRelevant != null">
+                #{legalRelevant},
+            </if>
+            <if test="locationReqByLaw != null">
+                #{locationReqByLaw},
+            </if>
+            <if test="nodeGuid != null">
+                #{nodeGuid},
+            </if>
+            <if test="nodeName != null">
+                #{nodeName},
+            </if>
+            <if test="partChangeIndex != null">
+                #{partChangeIndex},
+            </if>
+            <if test="partName != null">
+                #{partName},
+            </if>
+            <if test=" partNumber!= null">
+                #{partNumber},
+            </if>
+            <if test="partOwnershipIndicator != null">
+                #{partOwnershipIndicator},
+            </if>
+            <if test="partTid != null">
+                #{partTid},
+            </if>
+            <if test="positionVariantName != null">
+                #{positionVariantName},
+            </if>
+            <if test="preComments != null">
+                #{preComments},
+            </if>
+            <if test="quantity != null  and quantity!=''">
+                #{quantity},
+            </if>
+            <if test="releaseHint != null">
+                #{releaseHint},
+            </if>
+            <if test="reusable != null">
+                #{reusable},
+            </if>
+            <if test="rivetNutOrBolt != null">
+                #{rivetNutOrBolt},
+            </if>
+            <if test="screwProtection != null">
+                #{screwProtection},
+            </if>
+            <if test="seriesDisposal!= null">
+                #{seriesDisposal},
+            </if>
+            <if test="settingForcePath != null">
+                #{settingForcePath},
+            </if>
+            <if test="sopDate != null">
+                #{sopDate},
+            </if>
+            <if test="startupParameter != null">
+                #{startupParameter},
+            </if>
+            <if test="symmetricPart != null">
+                #{symmetricPart},
+            </if>
+            <if test="tighSelfTapping != null">
+                #{tighSelfTapping},
+            </if>
+            <if test="tighteningAngle != null">
+                #{tighteningAngle},
+            </if>
+            <if test="tighteningElement != null">
+                #{tighteningElement},
+            </if>
+            <if test="tighteningTorque!= null">
+                #{tighteningTorque},
+            </if>
+            <if test="unit != null">
+                #{unit},
+            </if>
+            <if test="usageRule != null">
+                #{usageRule},
+            </if>
+            <if test="weight != null">
+                #{weight},
+            </if>
+            <if test="weightType != null">
+                #{weightType},
+            </if>
+            <if test="weightUnit != null">
+                #{weightUnit},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>

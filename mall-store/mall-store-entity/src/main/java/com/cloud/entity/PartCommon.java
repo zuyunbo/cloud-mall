@@ -1,5 +1,6 @@
 package com.cloud.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -10,12 +11,12 @@ import org.springframework.data.annotation.Transient;
 
 /**
  * @author 2u c1111
- * @since 1.0 2021-03-05
+ * @since 1.0 2021-03-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Api(description = "part_assembly")
-public class PartAssembly {
+@Api(description = "part_common")
+public class PartCommon {
 
     private Long id;
 
@@ -25,6 +26,20 @@ public class PartAssembly {
      */
     @ApiModelProperty("影响BOM产品")
     private String affectBom;
+
+
+    /**
+     * 售后旧件处理
+     */
+    @ApiModelProperty("售后旧件处理")
+    private String afterSalesDisposal;
+
+
+    /**
+     * 本色件号
+     */
+    @ApiModelProperty("本色件号")
+    private String allColorReference;
 
 
     /**
@@ -49,6 +64,34 @@ public class PartAssembly {
 
 
     /**
+     * 关键字符
+     */
+    @ApiModelProperty("关键字符")
+    private String bmwCharacterKey;
+
+
+    /**
+     * 参考数模的零件号
+     */
+    @ApiModelProperty("参考数模的零件号")
+    private String bmwDmu;
+
+
+    /**
+     * 参考图纸的零件号
+     */
+    @ApiModelProperty("参考图纸的零件号")
+    private String bmwDrawingHint;
+
+
+    /**
+     * 硬件/软件标识
+     */
+    @ApiModelProperty("硬件/软件标识")
+    private String bmwHwSwMark;
+
+
+    /**
      * I-Level
      */
     @ApiModelProperty("I-Level")
@@ -56,10 +99,24 @@ public class PartAssembly {
 
 
     /**
+     * 左右件标识
+     */
+    @ApiModelProperty("左右件标识")
+    private String bmwLeftRightCharacteristics;
+
+
+    /**
      * 标贴位置
      */
     @ApiModelProperty("标贴位置")
     private String bmwLocation;
+
+
+    /**
+     * 零件状态
+     */
+    @ApiModelProperty("零件状态")
+    private String bmwReleaseStatus;
 
 
     /**
@@ -126,6 +183,20 @@ public class PartAssembly {
 
 
     /**
+     * 零件变更单
+     */
+    @ApiModelProperty("零件变更单")
+    private String changeNumberPartVersion;
+
+
+    /**
+     * 颜色代码
+     */
+    @ApiModelProperty("颜色代码")
+    private String colorCode;
+
+
+    /**
      * 售后备注
      */
     @ApiModelProperty("售后备注")
@@ -140,6 +211,13 @@ public class PartAssembly {
 
 
     /**
+     * 危险品标识
+     */
+    @ApiModelProperty("危险品标识")
+    private String dangerousGoods;
+
+
+    /**
      * 数据操作标识
      */
     @ApiModelProperty("数据操作标识")
@@ -151,6 +229,20 @@ public class PartAssembly {
      */
     @ApiModelProperty("铆接力值（N）")
     private String deviationSettingForcePath;
+
+
+    /**
+     * 图纸版本
+     */
+    @ApiModelProperty("图纸版本")
+    private String drawingIndex;
+
+
+    /**
+     * 防静电标识
+     */
+    @ApiModelProperty("防静电标识")
+    private String esdFlag;
 
 
     /**
@@ -210,6 +302,13 @@ public class PartAssembly {
 
 
     /**
+     * 法规标识
+     */
+    @ApiModelProperty("法规标识")
+    private String legalRelevant;
+
+
+    /**
      * 标贴位置法规要求
      */
     @ApiModelProperty("标贴位置法规要求")
@@ -231,6 +330,41 @@ public class PartAssembly {
 
 
     /**
+     * 零件版本
+     */
+    @ApiModelProperty("零件版本")
+    private String partChangeIndex;
+
+
+    /**
+     * 零件名称
+     */
+    @ApiModelProperty("零件名称")
+    private String partName;
+
+
+    /**
+     * 零件编号
+     */
+    @ApiModelProperty("零件编号")
+    private String partNumber;
+
+
+    /**
+     * 零件归属标识
+     */
+    @ApiModelProperty("零件归属标识")
+    private String partOwnershipIndicator;
+
+
+    /**
+     * 零件目标生效时间
+     */
+    @ApiModelProperty("零件目标生效时间")
+    private String partTid;
+
+
+    /**
      * F/N
      */
     @ApiModelProperty("F/N")
@@ -248,7 +382,7 @@ public class PartAssembly {
      * 数量
      */
     @ApiModelProperty("数量")
-    private Integer quantity;
+    private String quantity;
 
 
     /**
@@ -280,6 +414,13 @@ public class PartAssembly {
 
 
     /**
+     * 生产旧件处理
+     */
+    @ApiModelProperty("生产旧件处理")
+    private String seriesDisposal;
+
+
+    /**
      * 铆接力值设定
      */
     @ApiModelProperty("铆接力值设定")
@@ -298,6 +439,13 @@ public class PartAssembly {
      */
     @ApiModelProperty("Startup parameter")
     private String startupParameter;
+
+
+    /**
+     * 对称件
+     */
+    @ApiModelProperty("对称件")
+    private String symmetricPart;
 
 
     /**
@@ -329,6 +477,13 @@ public class PartAssembly {
 
 
     /**
+     * 数量单位
+     */
+    @ApiModelProperty("数量单位")
+    private String unit;
+
+
+    /**
      * 使用规则
      */
     @ApiModelProperty("使用规则")
@@ -355,7 +510,7 @@ public class PartAssembly {
     @ApiModelProperty("重量单位")
     private String weightUnit;
 
-    @Transient
-    private String partIds;
+    @TableField(exist = false)
+    private String partIdz;
 
 }

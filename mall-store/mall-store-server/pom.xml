@@ -22,6 +22,14 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
+
+        <dependency>
             <groupId>com.cloud</groupId>
             <artifactId>cloud-database</artifactId>
             <version>1.0</version>

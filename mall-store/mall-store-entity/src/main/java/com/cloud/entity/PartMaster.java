@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Transient;
 
 
 /**
@@ -18,11 +19,6 @@ import lombok.EqualsAndHashCode;
 public class PartMaster {
 
     private Long id;
-
-
-
-
-
     /**
      * 本色件号
      */
@@ -163,4 +159,8 @@ public class PartMaster {
      */
      @ApiModelProperty("数量单位")
      private String unit;
+
+    @Transient
+    private String partIds;
+
 }

@@ -6,23 +6,23 @@ import com.cloud.entity.PartAssembly;
 import com.cloud.entity.PartMaster;
 import com.cloud.entity.PartVersion;
 import com.cloud.service.CUserService;
+import com.cloud.service.aojo.AnalyseFileService;
+import com.cloud.service.aojo.impl.*;
 import com.cloud.service.xsd.part.ac.*;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.*;
+import java.io.File;
 import java.lang.Class;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.concurrent.locks.Lock;
 
 /**
  * @Author zuyunbo
@@ -32,8 +32,13 @@ import java.util.concurrent.locks.Lock;
 @RequestMapping("/test")
 public class testController extends SuperController<CUserService, CUser, CUser> {
 
+
+    @Autowired
+    SuperFactor superFactor;
+
     @GetMapping("/code1")
-    public String generator1() {
+    public String generator1(@RequestParam("file") MultipartFile file) {
+        superFactor.test(file);
         return "111";
     }
 
@@ -41,89 +46,6 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     private static Map<String, Object> partAssemblyMap = new HashMap<>();
     private static Map<String, Object> partMasterMap = new HashMap<>();
     private static Map<String, Object> partVersionMap = new HashMap<>();
-
-
-    static {
-        // BOM init
-        partAssemblyMap.put("partAssembly", PartAssembly.class);
-        partAssemblyMap.put("Node GUID", "nodeGuid");
-        partAssemblyMap.put("Affect BOM", "affectBom");
-        partAssemblyMap.put("BKK Part Number ref.", "bkkPartNumberRef");
-        partAssemblyMap.put("Node Name", "nodeName");
-        partAssemblyMap.put("BOM line ID", "bomLineId");
-        partAssemblyMap.put("Change Number", "changeNumber");
-        partAssemblyMap.put("BoM Change Number Time Stamp", "bomChangeNumberTimeStamp");
-        partAssemblyMap.put("Quantity", "quantity");
-        partAssemblyMap.put("Position Variant Name", "positionVariantName");
-        partAssemblyMap.put("Usage Rule", "usageRule");
-        partAssemblyMap.put("BOM Line TID", "bomLineTid");
-        partAssemblyMap.put("BOM valid until date", "bomValidUntilDate");
-        partAssemblyMap.put("Release hint", "releaseHint");
-        partAssemblyMap.put("Weight type", "weightType");
-        partAssemblyMap.put("Weight", "weight");
-        partAssemblyMap.put("Weight Unit", "weightUnit");
-        partAssemblyMap.put("Build phase", "buildPhase");
-        partAssemblyMap.put("SOP date", "sopDate");
-        partAssemblyMap.put("Startup parameter", "startupParameter");
-        partAssemblyMap.put("BMW I-Level", "bmwIEvel");
-        partAssemblyMap.put("tightening element", "tighteningElement");
-        partAssemblyMap.put("Reusable", "reusable");
-        partAssemblyMap.put("Bolting category", "boltingCategory");
-        partAssemblyMap.put("Rivet nut or bolt", "rivetNutOrBolt");
-        partAssemblyMap.put("Setting force/path", "settingForcePath");
-        partAssemblyMap.put("Deviation setting force/path", "deviationSettingForcePath");
-        partAssemblyMap.put("Control method", "controlMethod");
-        partAssemblyMap.put("Tigh.self-tapping", "tighSelfTapping");
-        partAssemblyMap.put("Screw Protection", "screwProtection");
-        partAssemblyMap.put("Bolting class", "boltingClass");
-        partAssemblyMap.put("tightening torque", "tighteningTorque");
-        partAssemblyMap.put("Est.max.tight.torque", "estMaxTightTorque");
-        partAssemblyMap.put("Tightening angle", "tighteningAngle");
-        partAssemblyMap.put("Angle tolerance", "angleTolerance");
-        partAssemblyMap.put("Pre-comments", "preComments");
-        partAssemblyMap.put("Comment Service", "commentService");
-        partAssemblyMap.put("BMW location", "bmwLocation");
-        partAssemblyMap.put("label req. by law", "labelReqByLaw");
-        partAssemblyMap.put("fitment location", "fitmentLocation");
-        partAssemblyMap.put("location req. by law", "locationReqByLaw");
-        partAssemblyMap.put("G-BOM CO No.", "gBomCoNo");
-        partAssemblyMap.put("Creator", "creator");
-        partAssemblyMap.put("GWM Comment", "gwmComment");
-        partAssemblyMap.put("external part number", "externalPartNumber");
-        partAssemblyMap.put("External Part CI", "externalPartCi");
-        partAssemblyMap.put("External Part DI", "externalPartDi");
-        partAssemblyMap.put("Assembly header reference GUID", "assemblyHeaderReferenceGuid");
-
-        //  partMaster  init
-        partMasterMap.put("partMasterMap", PartMaster.class);
-        partMasterMap.put("part number", "partNumber");
-        partMasterMap.put("part name (ENG)", "partName");
-        partMasterMap.put("Unit", "unit");
-        partMasterMap.put("Part Ownership Indicator", "partOwnershipIndicator");
-        partMasterMap.put("BMW character key", "bmwCharacterKey");
-        partMasterMap.put("BMW left - right characteristics", "bmwLeftRightCharacteristics");
-        partMasterMap.put("Symmetric Part", "symmetricPart");
-        partMasterMap.put("Legal Relevant", "legalRelevant");
-        partMasterMap.put("ESD Flag", "esdFlag");
-        partMasterMap.put("dangerous goods", "dangerousGoods");
-        partMasterMap.put("BMW DMU", "bmwDmu");
-        partMasterMap.put("BMW drawing hint", "bmwDrawingHint");
-        partMasterMap.put("All color reference", "allColorReference");
-        partMasterMap.put("BMW release status", "bmwReleaseStatus");
-        partMasterMap.put("Color Code", "colorCode");
-        partMasterMap.put("BMW HW/SW mark", "bmwHwSwMark");
-
-        //   partVersion  init
-        partVersionMap.put("partVersion", PartVersion.class);
-        partVersionMap.put("part change index", "partChangeIndex");
-        partVersionMap.put("drawing index", "drawingIndex");
-        partVersionMap.put("Part TID", "partTid");
-        partVersionMap.put("Change Number Part Version", "changeNumberPartVersion");
-        partVersionMap.put("Series Disposal", "seriesDisposal");
-        partVersionMap.put("Aftersales disposal", "afterSalesDisposal");
-
-
-    }
 
 
     public static <T> void set(T bean, String fun, Object value) throws Exception {
@@ -136,6 +58,49 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
         char[] cs = str.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);
+    }
+
+
+    public static Object convertXmlStrToObject(Class<?> clazz, String xmlStr) {
+
+        Object xmlObject = null;
+
+        try {
+
+            JAXBContext context = JAXBContext.newInstance(clazz);
+
+            // 进行将Xml转成对象的核心接口
+
+            Unmarshaller unmarshal = context.createUnmarshaller();
+
+            StringReader sr = new StringReader(xmlStr);
+
+            xmlObject = unmarshal.unmarshal(sr);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return xmlObject;
+
+    }
+
+
+    @PostMapping("/import1")
+    public byte[] addUser1() {
+        try {
+            BufferedInputStream bis = null;
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210129_1219_A (1).stpx")));
+            byte[] buff = new byte[bis.available()];
+
+            int i = bis.read(buff);
+            return buff;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -177,7 +142,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
                         PartAssembly partAssembly = new PartAssembly();
                         Part.Versions versions = ((Part) baseRootObject).getVersions();
                         List<com.cloud.service.xsd.part.ac.PartVersion> partVersion1 = versions.getPartVersion();
-                        for(com.cloud.service.xsd.part.ac.PartVersion partVersion2 : partVersion1){
+                        for (com.cloud.service.xsd.part.ac.PartVersion partVersion2 : partVersion1) {
                             List<PropertyValueAssignment> propertyValueAssignment = partVersion2.getPropertyValueAssignment();
                             forPartValue(partVersion, partMaster, partAssembly, propertyValueAssignment);
                         }
@@ -266,46 +231,6 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
         }
 
         return true;
-    }
-
-
-
-    public static void main(String[] args) {
-/*
-        Object o = convertXmlFileToObject(Uos.class, "/Users/zuyunbo/202101/xsd/GWM_EC11_20210128_0832_A.STPX");
-*/
-        System.out.println("zhuan");
-    }
-
-    public <T> void testType(List<String> a1, List<ArrayList<String>> a2, List<T> a3, List<? extends Number> a4, List<ArrayList<String[]>> a5, Map<String, Integer> a6) {
-
-    }
-
-
-    public static Object convertXmlStrToObject(Class<?> clazz, String xmlStr) {
-
-        Object xmlObject = null;
-
-        try {
-
-            JAXBContext context = JAXBContext.newInstance(clazz);
-
-            // 进行将Xml转成对象的核心接口
-
-            Unmarshaller unmarshal = context.createUnmarshaller();
-
-            StringReader sr = new StringReader(xmlStr);
-
-            xmlObject = unmarshal.unmarshal(sr);
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-        return xmlObject;
-
     }
 
 
