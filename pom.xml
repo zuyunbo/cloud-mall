@@ -11,6 +11,7 @@
 
     <modules>
         <module>mall-store</module>
+        <module>cloud-gecco</module>
     </modules>
 
     <parent>

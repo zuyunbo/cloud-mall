@@ -92,7 +92,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     public byte[] addUser1() {
         try {
             BufferedInputStream bis = null;
-            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210129_1219_A (1).stpx")));
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210208_0756_A_CODEX-78.stpx")));
             byte[] buff = new byte[bis.available()];
 
             int i = bis.read(buff);
