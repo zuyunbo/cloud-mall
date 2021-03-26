@@ -1,76 +1,109 @@
 package com.cloud.service.impl;
 
 import com.cloud.ac.*;
-import com.cloud.entity.PartInstance;
-import com.cloud.entity.PartPropertyValueAssignment;
 import com.cloud.service.AnalyseFileContentService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author zuyunbo
  * @Date 2021/3/16  4:08 下午
  **/
-public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImpl implements AnalyseFileContentService{
+@Service
+public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImpl implements AnalyseFileContentService {
+
+    public static Map<String, Map<String, String>> map = new HashMap<>();
+
+    private static List<com.cloud.entity.PartVersion> insetPartProduct(Part part) {
+        List<com.cloud.entity.PartVersion> partVersions = new ArrayList<>();
+        Part.Versions versions = part.getVersions();
+        List<PartVersion> partVersion = versions.getPartVersion();
+        for (PartVersion partVersion1 : partVersion) {
+            PartVersion.Views views = partVersion1.getViews();
+            List<PartView> partView = views.getPartView();
+            for (PartView partView1 : partView) {
+                // 初始化参数
+                List<ViewOccurrenceRelationship> viewOccurrenceRelationship = partView1.getViewOccurrenceRelationship();
+                for (ViewOccurrenceRelationship viewOccurrenceRelationship1 : viewOccurrenceRelationship) {
+                    com.cloud.entity.PartVersion partVersionReturn = new com.cloud.entity.PartVersion();
+                    Map<String, String> characterStringMap = new HashMap<>();
+                    String uid = ((SingleOccurrence) viewOccurrenceRelationship1.getRelated().getUidRef()).getUid();
+                    if (map.containsKey(uid)) {
+                        characterStringMap = map.get(uid);
+                    }
+                    // 根据文档中的字段 对应 实体类字段关系
+                    setMapByPartLocation(characterStringMap, viewOccurrenceRelationship1.getPropertyValueAssignment());
+                    partVersionReturn.setCharacterString(characterStringMap);
+                    partVersions.add(partVersionReturn);
+                }
+            }
+        }
+        return partVersions;
+    }
+
+    // part列表
+    public static Map<String, String> insertPartInstance(Part part) {
+        Map<String, String> characterStringMap = new HashMap<>();
+        setMapByPartLocation(characterStringMap, part.getPropertyValueAssignment());
+        return characterStringMap;
+    }
 
 
     @Override
-    public void analyseFileContent(Object file) {
-        // 初始化Part
-        List<PartInstance> partInstances = new ArrayList<>();
-
+    public List<com.cloud.entity.PartVersion> analyseFileContent(Object file) {
         // 第一种取出part下的信息
+        List<com.cloud.entity.PartVersion> partVersions = new ArrayList<>();
         List<BaseRootObject> activityOrActivityMethodOrAddress1 = (List<BaseRootObject>) super.resolvingAp242(file);
         for (BaseRootObject baseRootObject : activityOrActivityMethodOrAddress1) {
-            PartInstance partInstance = new PartInstance();
-            PartPropertyValueAssignment partPropertyValueAssignment = new PartPropertyValueAssignment();
-            Map<String,String> characterStringMap = new HashMap<>();
-            List<com.cloud.entity.PartVersion> partVersions = new ArrayList<>();
+            com.cloud.entity.PartVersion partVersionReturn = new com.cloud.entity.PartVersion();
+            Map<String, String> characterStringMap = new HashMap<>();
             // 直接放入最外层的 PropertyValueAssignment
-            setMapByPartLocation(characterStringMap, ((Part) baseRootObject).getPropertyValueAssignment());
-            partPropertyValueAssignment.setCharacterString(characterStringMap);
-            partInstance.setPropertyValueAssignment(partPropertyValueAssignment);
+            Part part = ((Part) baseRootObject);
+            if (part.getPartTypes().getClassSelect().get(0).getValue().toString().equals("piece part")) {
+                characterStringMap = insertPartInstance(part);
+                characterStringMap.put("part name (ENG)", part.getName().getCharacterString());
+                characterStringMap.put("part number", part.getName().getCharacterString());
+            }
+
+            if (part.getPartTypes().getClassSelect().get(0).getValue().toString().equals("product") ||
+                    part.getPartTypes().getClassSelect().get(0).getValue().toString().equals("assembly")) {
+                List<com.cloud.entity.PartVersion> partVersions1 = insetPartProduct(part);
+                partVersions.addAll(partVersions1);
+                continue;
+            }
+
             // 解析每个版本里面的数据<PartVersion>
-            com.cloud.entity.PartVersion partVersion2 = new com.cloud.entity.PartVersion();
-            Part.Versions versions = ((Part) baseRootObject).getVersions();
+            Part.Versions versions = part.getVersions();
             List<PartVersion> partVersion = versions.getPartVersion();
             for (PartVersion partVersion1 : partVersion) {
-                // 解析<PartVersion>层的PropertyValueAssignment
-                PartPropertyValueAssignment partPropertyValueAssignment2 = new PartPropertyValueAssignment();
-                Map<String,String> characterStringMap2 = new HashMap<>();
-                setMapByPartLocation(characterStringMap2, partVersion1.getPropertyValueAssignment());
-                partPropertyValueAssignment2.setCharacterString(characterStringMap2);
-                partVersion2.setPropertyValueAssignment(partPropertyValueAssignment2);
-                partVersions.add(partVersion2);
-                partInstance.setPartVersion(partVersions);
-                // 解析<PartVersionRelationship>层的 PropertyValueAssignment 其中有继承的数据
-                com.cloud.entity.PartVersionRelationship partVersionRelationship = new  com.cloud.entity.PartVersionRelationship();
-                PartVersion.Views views = partVersion1.getViews();
-                List<PartView> partView = views.getPartView();
-                for (PartView partView1 : partView) {
-                    // 初始化参数
-                    PartPropertyValueAssignment partPropertyValueAssignment3 = new PartPropertyValueAssignment();
-                    Map<String,String> characterStringMap3 = new HashMap<>();
-                    List<ViewOccurrenceRelationship> viewOccurrenceRelationship = partView1.getViewOccurrenceRelationship();
-                    for (ViewOccurrenceRelationship viewOccurrenceRelationship1 : viewOccurrenceRelationship) {
-                        // 根据文档中的字段 对应 实体类字段关系
-                        setMapByPartLocation(characterStringMap3,viewOccurrenceRelationship1.getPropertyValueAssignment());
-                        partPropertyValueAssignment3.setCharacterString(characterStringMap3);
+                // 如果id为空代表有引用
+                if (StringUtils.isBlank(partVersion1.getId().getId())) {
+                    PartVersion.Views views = partVersion1.getViews();
+                    List<PartView> partViews = views.getPartView();
+                    for (PartView partView : partViews) {
+                        List<DefinitionBasedOccurrence> occurrence = partView.getOccurrence();
+                        for (DefinitionBasedOccurrence definitionBasedOccurrence : occurrence) {
+                            String id = definitionBasedOccurrence.getUid();
+                            Map<String, String> refCharacterStringMap = new HashMap<>();
+                            mapCopy(characterStringMap, refCharacterStringMap);
+                            map.put(id, refCharacterStringMap);
+                        }
                     }
-                    partVersionRelationship.setPropertyValueAssignment(partPropertyValueAssignment3);
+                    continue;
                 }
-                partVersion2.setPartVersionRelationship(partVersionRelationship);
+                // 解析<PartVersion>层的PropertyValueAssignment
+                setMapByPartLocation(characterStringMap, partVersion1.getPropertyValueAssignment());
+                partVersionReturn.setCharacterString(characterStringMap);
+                partVersions.add(partVersionReturn);
             }
-            partInstances.add(partInstance);
         }
-        System.out.println("111");
+        return partVersions;
 
     }
 
-    private void setMapByPartLocation(Map<String, String> characterStringMap, List<PropertyValueAssignment> propertyValueAssignment1) {
+    private static void setMapByPartLocation(Map<String, String> characterStringMap, List<PropertyValueAssignment> propertyValueAssignment1) {
         for (PropertyValueAssignment propertyValueAssignment2 : propertyValueAssignment1) {
             PropertyValueAssignment.AssignedPropertyValues assignedPropertyValues = propertyValueAssignment2.getAssignedPropertyValues();
             List<PropertyValue> propertyValue = assignedPropertyValues.getPropertyValue();
@@ -81,8 +114,26 @@ public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImp
                 String characterString = name.getCharacterString();
                 // value值
                 String value = valueComponent.getCharacterString();
-                characterStringMap.put(characterString,value);
+                characterStringMap.put(characterString, value);
             }
+        }
+    }
+
+
+    public static void mapCopy(Map paramsMap, Map resultMap) {
+        if (resultMap == null) {
+            resultMap = new HashMap();
+        }
+        if (paramsMap == null) {
+            return;
+        }
+
+        Iterator it = paramsMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            Object key = entry.getKey();
+            resultMap.put(key, paramsMap.get(key) != null ? paramsMap.get(key) : "");
+
         }
     }
 

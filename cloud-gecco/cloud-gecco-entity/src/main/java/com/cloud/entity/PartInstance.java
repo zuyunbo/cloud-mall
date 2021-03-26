@@ -12,6 +12,8 @@ public class PartInstance {
 
       private String partType;
 
+      private String partName;
+
       private List<PartVersion> partVersion;
 
       private PartPropertyValueAssignment propertyValueAssignment;
@@ -34,6 +36,14 @@ public class PartInstance {
 
       public List<PartVersion> getPartVersion() {
             return partVersion;
+      }
+
+      public String getPartName() {
+            return partName;
+      }
+
+      public void setPartName(String partName) {
+            this.partName = partName;
       }
 
       public void setPartVersion(List<PartVersion> partVersion) {
