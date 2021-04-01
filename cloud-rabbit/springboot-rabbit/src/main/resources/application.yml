@@ -20,7 +20,6 @@ spring:
     publisher-returns: true
     template:
       mandatory: true
-    publisher-confirm-type: none
     listener:
       direct:
         acknowledge-mode: manual

@@ -28,24 +28,11 @@ public class Producer {
     };
 
 
-    // 实现RabbitTemplate.ReturnCallback接口, 这里使用lambda表达式实现
-    /*public void returnedMessage(Message message, int replyCode, String replyText,
-                                String exchange, String routingKey)*/
-    private final RabbitTemplate.ReturnCallback returnCallback = (message, replyCode, replyText,
-                                                                  exchange, routingKey) -> {
-        System.out.println("message : " + message);
-        System.out.println("replyCode : " + replyCode);
-        System.out.println("replyText : " + replyText);
-        System.out.println("exchange : " + exchange);
-        System.out.println("routingKey : " + routingKey);
-    };
-
     public void sendMsg(Object message, Map<String, Object> properties) {
         // 消息头
         MessageHeaders messageHeaders = new MessageHeaders(properties);
         Message msg = MessageBuilder.createMessage(message, messageHeaders);
         rabbitTemplate.setConfirmCallback(confirmCallback);
-        rabbitTemplate.setReturnCallback(returnCallback);
         CorrelationData correlationData = new CorrelationData("123456789");
         MessagePostProcessor mpp = new MessagePostProcessor() {
 
