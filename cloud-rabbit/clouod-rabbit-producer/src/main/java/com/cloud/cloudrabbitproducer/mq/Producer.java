@@ -1,6 +1,8 @@
 package com.cloud.cloudrabbitproducer.mq;
 
 
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +41,23 @@ public class Producer {
     };
 
     public void sendMsg(Object message, Map<String, Object> properties) {
+        // 消息头
         MessageHeaders messageHeaders = new MessageHeaders(properties);
         Message msg = MessageBuilder.createMessage(message, messageHeaders);
         rabbitTemplate.setConfirmCallback(confirmCallback);
         rabbitTemplate.setReturnCallback(returnCallback);
         CorrelationData correlationData = new CorrelationData("123456789");
-        rabbitTemplate.convertAndSend("springboot", "springboot.test", msg, correlationData);
+        MessagePostProcessor mpp = new MessagePostProcessor() {
+
+            @Override
+            public org.springframework.amqp.core.Message postProcessMessage(org.springframework.amqp.core.Message message)
+                    throws AmqpException {
+                System.err.println("---> post to do: " + message);
+                return message;
+            }
+        };
+
+        rabbitTemplate.convertAndSend("springboot", "springboot.test", msg,mpp, correlationData);
     }
 
 }

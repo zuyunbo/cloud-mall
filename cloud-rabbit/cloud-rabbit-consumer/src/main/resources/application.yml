@@ -11,7 +11,17 @@ spring:
 #    url: jdbc:oracle:thin:@192.168.2.44:1521:EE
 #    username: core
 #    password: APP
-
+  #    password: APP
+  rabbitmq:
+    addresses: 47.105.35.98
+    username: admin
+    password: 123456
+    virtual-host: /
+    connection-timeout: 15000
+    publisher-returns: true
+    template:
+      mandatory: true
+    publisher-confirm-type: none
 
 server:
   port: 8087

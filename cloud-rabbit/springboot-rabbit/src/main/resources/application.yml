@@ -24,8 +24,9 @@ spring:
     listener:
       direct:
         acknowledge-mode: manual
+
 server:
-  port: 8088
+  port: 8089
 
 
 
