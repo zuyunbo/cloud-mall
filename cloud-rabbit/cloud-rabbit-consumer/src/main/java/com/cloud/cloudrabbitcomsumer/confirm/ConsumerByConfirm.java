@@ -32,6 +32,7 @@ public class ConsumerByConfirm {
 
         // 5. 声明消息队列
         String queueName = "test_confirm_queue";
+
         channel.queueDeclare(queueName, true, false, false, null);
         // 6. 绑定队列和Exchange
         channel.queueBind(queueName, exchangeName, routingKey);
