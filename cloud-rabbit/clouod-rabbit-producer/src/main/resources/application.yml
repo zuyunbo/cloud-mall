@@ -22,8 +22,11 @@ spring:
       mandatory: true
     publisher-confirm-type: CORRELATED
     listener:
-      direct:
+       simple:
+        concurrency: 1
+        max-concurrency: 1
         acknowledge-mode: manual
+        prefetch: 1
 server:
   port: 8088
 

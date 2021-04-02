@@ -35,8 +35,8 @@ public class Consumer {
         //	spring.rabbitmq.listener.simple.acknowledge-mode=manual
         Long deliveryTag = (Long)message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
 
-        channel.basicAck(deliveryTag, false);
 
+        channel.basicAck(deliveryTag, false);
     }
 
 }
