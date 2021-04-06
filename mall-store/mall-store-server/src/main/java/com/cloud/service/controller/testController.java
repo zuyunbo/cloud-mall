@@ -6,12 +6,10 @@ import com.cloud.entity.PartAssembly;
 import com.cloud.entity.PartMaster;
 import com.cloud.entity.PartVersion;
 import com.cloud.service.CUserService;
-import com.cloud.service.aojo.AnalyseFileService;
 import com.cloud.service.aojo.impl.*;
 import com.cloud.service.xsd.part.ac.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +29,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/test")
 public class testController extends SuperController<CUserService, CUser, CUser> {
+
 
 
     @Autowired
@@ -88,19 +87,46 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     }
 
 
-    @PostMapping("/import1")
-    public byte[] addUser1() {
+    @PostMapping("/import2")
+    public byte[] addUser2() {
         try {
             BufferedInputStream bis = null;
-            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210208_0756_A_CODEX-78.stpx")));
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210202_1445_A_CODEX-82.stpx")));
             byte[] buff = new byte[bis.available()];
 
             int i = bis.read(buff);
+
+
             return buff;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+
+    @PostMapping("/import1")
+    public byte[] addUser1() {
+        try {
+            BufferedInputStream bis = null;
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210318_1351_A.stpx")));
+            byte[] buff = new byte[bis.available()];
+
+            int i = bis.read(buff);
+
+
+            return buff;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        String ange = "GWM_EC12_20210318_1144_A.stpx";
+        String substring = ange.substring(4, 8);
+        System.out.println(substring);
     }
 
 

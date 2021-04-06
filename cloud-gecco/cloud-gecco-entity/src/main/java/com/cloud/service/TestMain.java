@@ -25,7 +25,7 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         BufferedInputStream bis = null;
-        bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210202_1445_A_CODEX-82.stpx")));
+        bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210318_1144_A.stpx")));
         AnalyseFileContentPartServiceImpl analyseFileContentPartService = new AnalyseFileContentPartServiceImpl();
         List<PartVersion> partVersions = analyseFileContentPartService.analyseFileContent(bis);
         List<PartCommon> list = new ArrayList<>();
@@ -122,13 +122,14 @@ public class TestMain {
         common.put("Symetric Part", "symmetricPart");
         common.put("Legal Relevant", "legalRelevant");
         common.put("ESD flag", "esdFlag");
-        common.put("Dangerous goods flag", "dangerousGoods");
+        common.put("Dangerous goods", "dangerousGoods");
         common.put("BMW DMU", "bmwDmu");
         common.put("BMW drawing hint", "bmwDrawingHint");
         common.put("All color reference", "allColorReference");
         common.put("BMW release status", "bmwReleaseStatus");
         common.put("Color Code", "colorCode");
         common.put("BMW HW/SW mark", "bmwHwSwMark");
+        common.put("BOM level", "bomLevel");
 
         //   partVersion  init
         common.put("part change index", "partChangeIndex");
@@ -137,6 +138,8 @@ public class TestMain {
         common.put("Change Number Part Version", "changeNumberPartVersion");
         common.put("Series Disposal", "seriesDisposal");
         common.put("Aftersales disposal", "afterSalesDisposal");
+        common.put("Diagnosis Address", "diagnosisAddress");
+        common.put("Initial/Change", "initialChange");
 
 
     }
