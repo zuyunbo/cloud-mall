@@ -43,6 +43,7 @@ public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImp
                         characterStringProduct.put("BOM level", "00");
                         characterStringProduct.put("Node GUID", part.getId().getId());
                         characterStringProduct.put("BOM line ID", characterStringMap.get("BOM line ID"));
+                        characterStringProduct.put("Node Name",characterStringMap.get("Node Name"));
                         com.cloud.entity.PartVersion partVersionProduct = new com.cloud.entity.PartVersion();
                         partVersionProduct.setCharacterString(characterStringProduct);
                         partVersions.add(partVersionProduct);

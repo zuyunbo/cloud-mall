@@ -511,4 +511,5 @@ public class PartCommon {
     @TableField(exist = false)
     private String partIdz;
 
+
 }
