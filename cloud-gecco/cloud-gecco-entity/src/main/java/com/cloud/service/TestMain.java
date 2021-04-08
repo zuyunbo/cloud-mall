@@ -1,8 +1,13 @@
 package com.cloud.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.cloud.ac.Part;
 import com.cloud.entity.PartVersion;
+import com.cloud.entity.common.PartCommonAssembly;
+import com.cloud.entity.common.PartCommonMaster;
+import com.cloud.entity.common.PartCommonVersion;
 import com.cloud.service.impl.AnalyseFileContentPartServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -22,6 +27,8 @@ public class TestMain {
 
     private static Map<String, Object> common = new HashMap<>();
 
+    private static ThreadLocal<List<String>> stringThreadLocal = new ThreadLocal<>();
+
 
     public static void main(String[] args) throws FileNotFoundException {
         BufferedInputStream bis = null;
@@ -38,6 +45,47 @@ public class TestMain {
             }
             list.add(partCommon);
         }
+
+        List<PartCommonVersion> list1 = new ArrayList<>();
+        List<PartCommonAssembly> list2 = new ArrayList<>();
+        List<PartCommonMaster> list3 = new ArrayList<>();
+        List<String> list4 = new ArrayList<>();
+
+        for(PartCommon common : list){
+            if(StringUtils.isEmpty(common.getCommonType())){
+                continue;
+            }
+            switch (common.getCommonType()){
+                case "version":
+                    PartCommonVersion partCommonVersion = new PartCommonVersion();
+                    BeanUtil.copyProperties(common,partCommonVersion);
+                    list1.add(partCommonVersion);
+                    PartCommonMaster partCommonMaster = new PartCommonMaster();
+                    BeanUtil.copyProperties(common,partCommonMaster);
+                    list3.add(partCommonMaster);
+                    list4.add(partCommonMaster.getPartName());
+                    break;
+                case "assembly":
+                    PartCommonAssembly partCommonAssembly = new PartCommonAssembly();
+                    BeanUtil.copyProperties(common,partCommonAssembly);
+                    list2.add(partCommonAssembly);
+                    break;
+                default:
+                    PartCommonAssembly partCommonAssembly1 = new PartCommonAssembly();
+                    BeanUtil.copyProperties(common,partCommonAssembly1);
+                    list2.add(partCommonAssembly1);
+            }
+        }
+        stringThreadLocal.set(list4);
+
+
+        for (PartCommonMaster p :list3){
+            List<String> strings = stringThreadLocal.get();
+            if(strings.contains(p.getPartName())){
+                System.out.println("这个已经生成过了 name=> " + p.getPartName());
+            }
+        }
+
         System.out.println("123");
 
     }
@@ -139,6 +187,9 @@ public class TestMain {
         common.put("Aftersales disposal", "afterSalesDisposal");
         common.put("Diagnosis Address", "diagnosisAddress");
         common.put("Initial/Change", "initialChange");
+        common.put("Common Type", "commonType");
+
+
 
 
     }

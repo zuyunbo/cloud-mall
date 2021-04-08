@@ -89,7 +89,7 @@ public class PartCommonAssembly {
     /**
      * BOM层级
      */
-    private Integer bomLevel;
+    private String bomLevel;
 
 
     /**

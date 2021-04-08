@@ -40,6 +40,7 @@ public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImp
                     // 根据文档中的字段 对应 实体类字段关系
                     if (part.getPartTypes().getClassSelect().get(0).getValue().toString().equals("product")) {
                         Map<String, String> characterStringProduct = new HashMap();
+                        characterStringMap.put("Common Type","produce");
                         characterStringProduct.put("BOM level", "00");
                         characterStringProduct.put("Node GUID", part.getId().getId());
                         characterStringProduct.put("BOM line ID", characterStringMap.get("BOM line ID"));
@@ -47,6 +48,9 @@ public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImp
                         com.cloud.entity.PartVersion partVersionProduct = new com.cloud.entity.PartVersion();
                         partVersionProduct.setCharacterString(characterStringProduct);
                         partVersions.add(partVersionProduct);
+                    }else {
+                        characterStringMap.put("Common Type","assembly");
+
                     }
 
                     partVersionReturn.setCharacterString(characterStringMap);
@@ -109,6 +113,7 @@ public class AnalyseFileContentPartServiceImpl extends AnalyseFileBodyServiceImp
                     continue;
                 }
                 // 解析<PartVersion>层的PropertyValueAssignment
+                characterStringMap.put("Common Type","version");
                 setMapByPartLocation(characterStringMap, partVersion1.getPropertyValueAssignment());
                 partVersionReturn.setCharacterString(characterStringMap);
                 partVersions.add(partVersionReturn);
