@@ -35,7 +35,6 @@ public class TestMain {
             for (String key : characterString.keySet()) {
                 System.out.println(key);
                 set(partCommon, "set" + captureName(common.get(key).toString()), characterString.get(key));
-
             }
             list.add(partCommon);
         }
