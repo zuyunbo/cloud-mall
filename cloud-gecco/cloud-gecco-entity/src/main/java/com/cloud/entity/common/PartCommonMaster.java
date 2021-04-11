@@ -17,6 +17,11 @@ public class PartCommonMaster {
      */
     private String partNumber;
 
+    /**
+     * 零件归属标识
+     */
+    private String partOwnershipIndicator;
+
 
     /**
      * 数量单位
@@ -29,10 +34,6 @@ public class PartCommonMaster {
      */
     private String bmwCharacterKey;
 
-    /**
-     * 零件归属标识
-     */
-    private String partOwnershipIndicator;
 
     /**
      * 左右件标识

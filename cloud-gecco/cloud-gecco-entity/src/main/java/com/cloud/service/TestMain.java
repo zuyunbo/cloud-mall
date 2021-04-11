@@ -5,6 +5,7 @@ import com.cloud.ac.Part;
 import com.cloud.entity.PartVersion;
 import com.cloud.entity.common.PartCommonAssembly;
 import com.cloud.entity.common.PartCommonMaster;
+import com.cloud.entity.common.PartCommonNode;
 import com.cloud.entity.common.PartCommonVersion;
 import com.cloud.service.impl.AnalyseFileContentPartServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +50,8 @@ public class TestMain {
         List<PartCommonVersion> list1 = new ArrayList<>();
         List<PartCommonAssembly> list2 = new ArrayList<>();
         List<PartCommonMaster> list3 = new ArrayList<>();
-        List<String> list4 = new ArrayList<>();
+        List<PartCommonNode> list4 = new ArrayList<>();
+        List<String> list5 = new ArrayList<>();
 
         for(PartCommon common : list){
             if(StringUtils.isEmpty(common.getCommonType())){
@@ -63,28 +65,36 @@ public class TestMain {
                     PartCommonMaster partCommonMaster = new PartCommonMaster();
                     BeanUtil.copyProperties(common,partCommonMaster);
                     list3.add(partCommonMaster);
-                    list4.add(partCommonMaster.getPartName());
+                    list5.add(partCommonMaster.getPartName());
                     break;
                 case "assembly":
                     PartCommonAssembly partCommonAssembly = new PartCommonAssembly();
                     BeanUtil.copyProperties(common,partCommonAssembly);
                     list2.add(partCommonAssembly);
                     break;
-                default:
+                case "produce" :
+                    PartCommonNode partCommonNode = new PartCommonNode();
+                    BeanUtil.copyProperties(common,partCommonNode);
+                    partCommonNode.setBomLevel("00");
+                    list4.add(partCommonNode);
                     PartCommonAssembly partCommonAssembly1 = new PartCommonAssembly();
                     BeanUtil.copyProperties(common,partCommonAssembly1);
                     list2.add(partCommonAssembly1);
+                default:
+
             }
         }
-        stringThreadLocal.set(list4);
 
-
+        stringThreadLocal.set(new ArrayList<>());
         for (PartCommonMaster p :list3){
             List<String> strings = stringThreadLocal.get();
             if(strings.contains(p.getPartName())){
+                list5.add(p.getPartName());
                 System.out.println("这个已经生成过了 name=> " + p.getPartName());
+                stringThreadLocal.set(list5);
             }
         }
+        stringThreadLocal.remove();
 
         System.out.println("123");
 
@@ -188,10 +198,6 @@ public class TestMain {
         common.put("Diagnosis Address", "diagnosisAddress");
         common.put("Initial/Change", "initialChange");
         common.put("Common Type", "commonType");
-
-
-
-
     }
 
 
