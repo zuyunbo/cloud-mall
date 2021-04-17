@@ -33,10 +33,11 @@ public class TestMain {
 
     public static void main(String[] args) throws FileNotFoundException {
         BufferedInputStream bis = null;
-        bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210318_1144_A.stpx")));
+        bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210329_0936_A.stpx")));
         AnalyseFileContentPartServiceImpl analyseFileContentPartService = new AnalyseFileContentPartServiceImpl();
         List<PartVersion> partVersions = analyseFileContentPartService.analyseFileContent(bis);
         List<PartCommon> list = new ArrayList<>();
+
         for (PartVersion partVersion : partVersions) {
             Map<String, String> characterString = partVersion.getCharacterString();
             PartCommon partCommon = new PartCommon();
