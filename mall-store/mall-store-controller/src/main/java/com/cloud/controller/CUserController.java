@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -29,6 +31,27 @@ import springfox.documentation.annotations.ApiIgnore;
 public class CUserController {
     @Autowired
     private CUserService cUserService;
+
+
+    public static void main(String[] args) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("createDateFrom","2021-04-15");
+        map.put("publishDateStart","2021-04-15");
+        for (String ste : map.keySet()) {
+            if ("createDateFrom".equals(ste)) {
+                Object createDateFrom = map.get("createDateFrom");
+                map.put("createDateFrom", createDateFrom + " 00:00");
+            }
+            if ("publishDateStart".equals(ste)) {
+                Object publishDateStart = map.get("publishDateStart");
+                map.put("publishDateStart", publishDateStart + " 23:59");
+            }
+        }
+        System.out.println(map.get("createDateFrom"));
+        System.out.println(map.get("publishDateStart"));
+
+    }
 
 
 }
