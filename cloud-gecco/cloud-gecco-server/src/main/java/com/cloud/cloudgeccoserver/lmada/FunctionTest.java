@@ -1,5 +1,6 @@
 package com.cloud.cloudgeccoserver.lmada;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class FunctionTest<In, Out> {
@@ -11,4 +12,7 @@ public class FunctionTest<In, Out> {
         FunctionTest<String, String> functionTest = new FunctionTest();
         System.out.println(functionTest.function.apply("ds"));
     }
+
+
+
 }
