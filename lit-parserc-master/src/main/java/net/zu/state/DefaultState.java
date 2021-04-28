@@ -1,5 +1,6 @@
 package net.zu.state;
 
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -34,8 +35,10 @@ public class DefaultState<T> implements State<T>{
 
     @Override
     public State<T> next(int n) {
+        // 当前节点
         State<T> next = this;
         for (int i = 0; i < n; i++) {
+            // 下一节点
             next = this.next();
             if (next.terminated())
                 return null;
@@ -46,5 +49,9 @@ public class DefaultState<T> implements State<T>{
     @Override
     public boolean terminated() {
         return terminated.test(this.state);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UUID.randomUUID().toString());
     }
 }

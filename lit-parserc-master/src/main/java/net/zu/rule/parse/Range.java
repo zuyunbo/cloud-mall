@@ -26,6 +26,7 @@ public class Range<T> implements CompoundRule<T> {
 
     @Override
     public State<T> match(State<T> source) throws MatchException {
+        // 如果
         if(source.next(Math.min(begin, end)).terminated())
             throw new MatchException(String.format("Range match error: Out of Range[%d,%d]\n",begin,end));
         if(begin == 0){
