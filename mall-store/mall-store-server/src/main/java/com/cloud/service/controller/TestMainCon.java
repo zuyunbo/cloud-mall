@@ -1,5 +1,7 @@
 package com.cloud.service.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -57,10 +59,9 @@ public class TestMainCon<T> {
 
 
     public static void main(String[] args) throws InterruptedException {
-        final int count = 10000 * 1000;
-
-        test1(count);// 975
-        test2(count);//1756
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd ");
+        Date date = new Date(System.currentTimeMillis());
+        System.out.println(formatter.format(date));
 
     }
 
@@ -117,7 +118,6 @@ public class TestMainCon<T> {
 
         System.out.println(System.currentTimeMillis() - l);
     }
-
 
 
 }

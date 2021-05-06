@@ -91,7 +91,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     public byte[] addUser2() {
         try {
             BufferedInputStream bis = null;
-            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_ES21_20210202_1445_A_CODEX-82.stpx")));
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210415_1101_A.stpx")));
             byte[] buff = new byte[bis.available()];
 
             int i = bis.read(buff);
@@ -110,7 +110,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     public byte[] addUser1() {
         try {
             BufferedInputStream bis = null;
-            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210329_1029_A-0419-2.stpx")));
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210318_1144_A.stpx")));
             byte[] buff = new byte[bis.available()];
 
             int i = bis.read(buff);

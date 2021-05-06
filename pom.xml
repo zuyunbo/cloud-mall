@@ -13,6 +13,7 @@
         <module>mall-store</module>
         <module>cloud-gecco</module>
         <module>mall-rabbit</module>
+        <module>lit-parserc-master</module>
     </modules>
 
     <parent>
