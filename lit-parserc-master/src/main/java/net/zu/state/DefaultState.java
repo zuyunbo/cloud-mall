@@ -52,6 +52,20 @@ public class DefaultState<T> implements State<T>{
     }
 
     public static void main(String[] args) {
-        System.out.println(UUID.randomUUID().toString());
+        int c = 10;
+        for(int i = 0, j = 3;i<=j;){
+
+            int tmp = i*i+j*j;
+            if(tmp<c){
+                i++;
+            }else if(tmp>c){
+                j--;
+            }else{
+                System.out.println("111");
+            }
+        }
+
+
+
     }
 }
