@@ -1,9 +1,9 @@
-package com.pattern.strategy.factory;
+package com.pattern.strategy.v.factory;
 
-import com.pattern.strategy.CashbackStrategy;
-import com.pattern.strategy.CouponStrategy;
-import com.pattern.strategy.GroupBuyStrategy;
-import com.pattern.strategy.PromotionStrategy;
+import com.pattern.strategy.v.CashbackStrategy;
+import com.pattern.strategy.v.CouponStrategy;
+import com.pattern.strategy.v.GroupBuyStrategy;
+import com.pattern.strategy.v.PromotionStrategy;
 
 import java.util.HashMap;
 import java.util.Map;

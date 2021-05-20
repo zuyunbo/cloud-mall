@@ -1,4 +1,4 @@
-package com.pattern.strategy;
+package com.pattern.strategy.v;
 
 public class CouponStrategy implements PromotionStrategy{
     @Override

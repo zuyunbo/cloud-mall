@@ -1,7 +1,6 @@
-package com.pattern.strategy.factory;
+package com.pattern.strategy.v.factory;
 
-import com.pattern.strategy.PromotionActivity;
-import com.pattern.strategy.PromotionStrategy;
+import com.pattern.strategy.v.PromotionActivity;
 
 public class PromotionStTest {
 
