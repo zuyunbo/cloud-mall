@@ -14,6 +14,9 @@
         <module>cloud-gecco</module>
         <module>mall-rabbit</module>
         <module>lit-parserc-master</module>
+        <module>Design</module>
+        <module>spring-demo</module>
+        <module>spring-demo-version</module>
     </modules>
 
     <parent>
