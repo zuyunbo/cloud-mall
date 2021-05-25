@@ -1,7 +1,6 @@
 package com.cloud.service.impl;
 
 
-import com.cloud.ac.Uos;
 import com.cloud.service.AnalyseFileCodeService;
 
 import javax.xml.bind.JAXBContext;

@@ -1,9 +1,5 @@
 package com.cloud.service;
 
-import com.cloud.ac.PropertyValue;
-import com.cloud.ac.PropertyValueAssignment;
-import com.cloud.ac.StringValue;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;

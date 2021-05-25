@@ -6,8 +6,6 @@ import com.cloud.entity.PartAssembly;
 import com.cloud.entity.PartMaster;
 import com.cloud.entity.PartVersion;
 import com.cloud.service.CUserService;
-import com.cloud.service.aojo.impl.*;
-import com.cloud.service.xsd.part.ac.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +30,14 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
 
 
 
-    @Autowired
+    /*@Autowired
     SuperFactor superFactor;
 
     @GetMapping("/code1")
     public String generator1(@RequestParam("file") MultipartFile file) {
         superFactor.test(file);
         return "111";
-    }
+    }*/
 
 
     private static Map<String, Object> partAssemblyMap = new HashMap<>();
@@ -110,7 +108,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     public byte[] addUser1() {
         try {
             BufferedInputStream bis = null;
-            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210318_1144_A.stpx")));
+            bis = new BufferedInputStream(new FileInputStream(new File("/Users/zuyunbo/202101/xsd/GWM_EC12_20210329_0936_A.stpx")));
             byte[] buff = new byte[bis.available()];
 
             int i = bis.read(buff);
@@ -130,7 +128,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
     }
 
 
-    @PostMapping("/import")
+   /* @PostMapping("/import")
     public void addUser(@RequestParam("file") MultipartFile file) {
 
         Object xmlObject = null;
@@ -232,7 +230,7 @@ public class testController extends SuperController<CUserService, CUser, CUser> 
             }
         }
     }
-
+*/
     /**
      * 判断对象中属性值是否全为空
      *

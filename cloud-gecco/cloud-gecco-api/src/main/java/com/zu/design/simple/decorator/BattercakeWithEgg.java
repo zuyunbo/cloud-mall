@@ -18,9 +18,10 @@ public class BattercakeWithEgg extends Battercake{
 
 
     public static void main(String[] args) {
+          String s = "Retest_GWM_EC12_20210422_0943_A-0506.stpx";
+        String str1=s.substring(s.indexOf("GWM_"));
+        String substring = str1.substring(4, 8);
 
-          String s = "005056B089C11EEBA48DD085FE73D9C9_210329CDX95";
-        String substring = s.substring(0, 32);
         System.out.println(substring);
 
 
