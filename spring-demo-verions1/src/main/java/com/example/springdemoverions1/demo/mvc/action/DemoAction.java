@@ -22,8 +22,8 @@ public class DemoAction {
 	private IDemoService demoService;
 
 	@GPRequestMapping("/query.*")
-	public void query(HttpServletRequest req, HttpServletResponse resp,
-					  @GPRequestParam("name") String name){
+	public void query(@GPRequestParam("name") HttpServletRequest req, @GPRequestParam("name") HttpServletResponse resp,
+					  @GPRequestParam("name") String name,@GPRequestParam("b") Integer b){
 //		String result = demoService.get(name);
 		String result = "My name is " + name;
 		try {
