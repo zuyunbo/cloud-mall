@@ -17,6 +17,7 @@
         <module>Design</module>
         <module>spring-demo</module>
         <module>spring-demo-version</module>
+        <module>spring-1.0</module>
     </modules>
 
     <parent>
