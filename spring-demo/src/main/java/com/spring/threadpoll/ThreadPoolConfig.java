@@ -59,7 +59,7 @@ public class ThreadPoolConfig {
 
         @Override
         public void run() {
-
+            taskNum++;
         }
     }
 
