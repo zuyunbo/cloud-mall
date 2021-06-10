@@ -1,7 +1,7 @@
 package com.cloud.cloudrabbitcomsumer.springbootmq;
 
 import com.rabbitmq.client.Channel;
-import org.springframework.amqp.rabbit.annotation.*;
+Steimport org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;

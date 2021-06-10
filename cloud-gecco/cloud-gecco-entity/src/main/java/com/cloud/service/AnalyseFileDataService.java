@@ -1,6 +1,5 @@
 package com.cloud.service;
 
-import com.cloud.ac.Part;
 import com.cloud.entity.PartVersion;
 
 import java.util.List;

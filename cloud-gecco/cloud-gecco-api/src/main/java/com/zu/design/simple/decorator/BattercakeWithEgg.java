@@ -16,4 +16,15 @@ public class BattercakeWithEgg extends Battercake{
           return super.getPrice()+1;
       }
 
+
+    public static void main(String[] args) {
+          String s = "Retest_GWM_EC12_20210422_0943_A-0506.stpx";
+        String str1=s.substring(s.indexOf("GWM_"));
+        String substring = str1.substring(4, 8);
+
+        System.out.println(substring);
+
+
+    }
+
 }

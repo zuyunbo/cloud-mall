@@ -1,7 +1,6 @@
 package com.cloud.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.cloud.ac.Part;
 import com.cloud.entity.PartVersion;
 import com.cloud.entity.common.PartCommonAssembly;
 import com.cloud.entity.common.PartCommonMaster;
