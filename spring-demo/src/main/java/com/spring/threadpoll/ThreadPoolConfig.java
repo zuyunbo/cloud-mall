@@ -23,7 +23,6 @@ public class ThreadPoolConfig {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5,10,200, TimeUnit.MILLISECONDS,new ArrayBlockingQueue<Runnable>(5));
 
         long start = System.currentTimeMillis();
-
         for(int i=0;i<14;i++){
 
             synchronized (MyTask.class){
