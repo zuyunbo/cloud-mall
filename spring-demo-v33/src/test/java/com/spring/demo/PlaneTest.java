@@ -28,11 +28,11 @@ class PlaneTest {
 
         System.out.println("inti BeanFactory successfully");
 
-        Plane plane = beanFactory.getBean("plane",Plane.class);
+/*        Plane plane = beanFactory.getBean("plane",Plane.class);
 
         System.out.println("Plane Bean  is ready to use");
 
-        plane.introduce();
+        plane.introduce();*/
 
 
     }
