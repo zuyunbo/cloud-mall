@@ -16,9 +16,10 @@
         <module>lit-parserc-master</module>
         <module>Design</module>
         <module>spring-demo</module>
-        <module>spring-demo-version</module>
         <module>spring-demo-v33</module>
         <module>spring-1.0</module>
+        <module>rpc-server</module>
+        <module>rpc-clent</module>
     </modules>
 
     <parent>
