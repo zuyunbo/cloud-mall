@@ -19,6 +19,8 @@
         <module>spring-demo-version</module>
         <module>spring-demo-v33</module>
         <module>spring-1.0</module>
+        <module>untitled</module>
+        <module>sprng-demo-v1</module>
     </modules>
 
     <parent>
