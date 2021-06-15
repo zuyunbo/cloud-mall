@@ -6,7 +6,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean id="plane" class="com.spring.demo.Plane"
-          p:brand="A380" p:color="Blue" p:maxSpeed="700" />
-
+    <beans>
+        <!-- 配置IOC容器要管理的对象   bean作用域: 单例  原型 -->
+        <bean id="student" class="com.spring.demo.entity.Student" scope="singleton" lazy-init="true">
+            <!-- 依赖注入:   属性注入    构造器注入   注解注入-->
+            <property name="name" value="小明"></property>
+            <property name="tClass" ref="tclass"></property>
+        </bean>
+        <bean id="tclass" class="com.spring.demo.entity.TClass">
+            <property name="cname" value="3年2班"></property>
+            <property name="teacher" ref="teacher"></property>
+        </bean>
+        <bean id="teacher" class="com.spring.demo.entity.Teacher">
+            <property name="name" value="陈老师"></property>
+        </bean>
+    </beans>
 </beans>
