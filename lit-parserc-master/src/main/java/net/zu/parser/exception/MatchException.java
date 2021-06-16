@@ -1,9 +1,5 @@
-package net.zu.exception;
+package net.zu.parser.exception;
 
-/**
- * @Author zuyunbo
- * @Date 2021/4/22  10:25 上午
- **/
 public class MatchException extends Exception {
     public MatchException(String message) {
         super(message);
