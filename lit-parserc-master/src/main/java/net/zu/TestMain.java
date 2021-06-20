@@ -1,6 +1,5 @@
 package net.zu;
 
-import net.zu.rource.TextSource;
 
 /**
  * @Author zuyunbo
@@ -9,7 +8,9 @@ import net.zu.rource.TextSource;
 public class TestMain {
 
     public static void main(String[] args) {
+/*
         System.out.println(TextSource.make("(define (fuck shit) (for (x in 'y) (display x))))"));
+*/
     }
 
 }
