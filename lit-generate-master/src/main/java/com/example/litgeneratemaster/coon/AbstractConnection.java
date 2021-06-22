@@ -17,6 +17,8 @@ public abstract class AbstractConnection {
         InputStream resourceAsStream = MysqlConnectionPool.class.getClassLoader().getResourceAsStream(
                 "application.yml");
         Properties prop = new Properties();
+        log.info(String.format("connection match properties:  %s got %s\n",
+                resourceAsStream,prop));
         try {
             prop.load(resourceAsStream);
         } catch (IOException e) {
