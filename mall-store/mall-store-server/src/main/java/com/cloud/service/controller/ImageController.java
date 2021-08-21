@@ -57,7 +57,7 @@ public class ImageController {
             URL urlConnect = new URL(url);
             HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
             con.setRequestMethod("GET");
-            con.setConnectTimeout(4 * 1000);
+            con.setReadTimeout(4 * 1000);
             // 通过输入流获取图片数据
             inStream = con.getInputStream();
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -73,7 +73,7 @@ public class ImageController {
             out = response.getOutputStream();
             out.write(data);
         } catch (Exception e) {
-            LOGGER.error("发起请求出现异常:", e);
+            LOGGER.error("发起请求出现异常: {}", e.getMessage());
         } finally {
             if (inStream != null) {
                 try {

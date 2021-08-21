@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: mall-store
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cloud_code1?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@192.168.2.44:1521:EE
+#    username: core
+#    password: APP
+
+
+server:
+  port: 8091
+
+
+
+logging:
+  level:
+    com.cloud : debug

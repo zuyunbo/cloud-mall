@@ -1,10 +1,10 @@
-package com.cloud.cloudgeccoserver;
+package com.example.parzering;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CloudGeccoServerApplicationTests {
+class ParzeringApplicationTests {
 
     @Test
     void contextLoads() {
