@@ -18,6 +18,7 @@ public class RangeTest {
     @Before
     public void setUp() throws Exception {
         a = new Charset('a');
+        System.out.println("ds");
     }
 
 

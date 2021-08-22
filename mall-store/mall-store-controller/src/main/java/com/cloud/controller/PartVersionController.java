@@ -1,6 +1,7 @@
 package com.cloud.controller;
 
 import com.cloud.entity.PartVersion;
+import com.cloud.param.CApplicationParam;
 import com.cloud.param.PartVersionParam;
 import com.cloud.service.PartVersionService;
 import com.github.pagehelper.PageInfo;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -32,16 +35,9 @@ public class PartVersionController {
 
     @GetMapping("page")
     @ApiOperation("分页")
-    @ApiImplicitParams({
-        @ApiImplicitParam( value = "当前页码，从1开始", paramType = "query", required = true, dataType="int") ,
-        @ApiImplicitParam( value = "每页显示记录数", paramType = "query",required = true, dataType="int") ,
-        @ApiImplicitParam( value = "排序字段", paramType = "query", dataType="String") ,
-        @ApiImplicitParam(value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String")
-    })
     public Object page(PartVersionParam queryParam){
-        PageInfo pageInfo = partVersionService.pageQuery(queryParam);
 
-        return BaseResponseUtil.constructResponse(BaseResponseUtil.SUCCESS, "查询成功", pageInfo);
+        return BaseResponseUtil.constructResponse(BaseResponseUtil.SUCCESS, "查询成功", null);
     }
 
     @DeleteMapping(value = "/{id}")
