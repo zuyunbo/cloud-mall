@@ -1,88 +1,41 @@
 package com.cloud.service.syn;
 
+import java.util.List;
+
 /**
  * @Author zuyunbo
  * @Date 2021/6/3  4:07 下午
  **/
 public class Parts {
 
-    Long id;
+   private String beginTime;
 
-    String tax;
+   private String endTime;
 
-    String proFile;
-
-    String zzz;
-
-    String ssaa;
+   private List<String> cameraGBIds;
 
 
-    public Long getId() {
-        return id;
+    public String getBeginTime() {
+        return beginTime;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
     }
 
-    public String getTax() {
-        return tax;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setTax(String tax) {
-        this.tax = tax;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public String getProFile() {
-        return proFile;
+    public List<String> getCameraGBIds() {
+        return cameraGBIds;
     }
 
-    public void setProFile(String proFile) {
-        this.proFile = proFile;
+    public void setCameraGBIds(List<String> cameraGBIds) {
+        this.cameraGBIds = cameraGBIds;
     }
-
-    public String getZzz() {
-        return zzz;
-    }
-
-    public void setZzz(String zzz) {
-        this.zzz = zzz;
-    }
-
-    public String getSsaa() {
-        return ssaa;
-    }
-
-    public void setSsaa(String ssaa) {
-        this.ssaa = ssaa;
-    }
-
-    /**
-     *
-     * @param id
-     * @param tax
-     * @param proFile
-     */
-    public Parts(Long id, String tax, String proFile) {
-        this(id, tax, proFile, null, null);
-    }
-
-    public Parts(Long id, String tax, String proFile, String zzz, String ssaa) {
-        this.id = id;
-        this.tax = tax;
-        this.proFile = proFile;
-        this.zzz = zzz;
-        this.ssaa = ssaa;
-    }
-
-
-
-
-    /**
-     * 存入相关
-     *
-     * @return
-     */
-
-
 }
